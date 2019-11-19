@@ -1,0 +1,13 @@
+aliceN -- 2019-11-18 23:54
+To the design doc, added: specific bootstrap features to implement, 
+explanation of how we store our data and how to access it, 
+made users database more compact, added roles, added functions.
+
+aliceN -- 2019-11-18 06:14
+Finished preliminary design document.
+
+josephY -- 2019-11-14 21:35
+Began working on implementing the UNSTATS API, running into an issue where 
+for most country codes, indicator 1.1.1 has blank "data." I don't know if this
+is a problem with the API, my querystring, or something else. Indicator 1.1.1
+for M49 code 1 (the World) works though, which is nice.
