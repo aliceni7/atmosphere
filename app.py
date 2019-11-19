@@ -30,60 +30,86 @@ app.secret_key = os.urandom(24)
 
 
 def runsqlcommand(command):
-    DB_FILE = "data.db"
-    db = sqlite3.connect(DB_FILE)  # open if file exists, otherwise create
-    c = db.cursor()  # facilitate db ops
-    c.execute(command)
-    if "select" in command.lower():
-        return c.fetchall()
-    db.commit()  # save changes
-    db.close()  # close database
+	DB_FILE = "data.db"
+	db = sqlite3.connect(DB_FILE)  # open if file exists, otherwise create
+	c = db.cursor()  # facilitate db ops
+	c.execute(command)
+	if "select" in command.lower():
+		return c.fetchall()
+	db.commit()  # save changes
+	db.close()  # close database
 
 
 @app.route("/")  # assign following fxn to run when root route requested
 def index():
-    return render_template('index.html')
+	return render_template('index.html')
 
 
 @app.route("/login")
 def login():
-    if "username" in request.args:
-        command = "SELECT * FROM loginfo"
-        pair = runsqlcommand(command)
-        if len(pair) == 0:
-            return "WRONG USERNAME"
-        else:
-            session["username"] = request.args[pair["username"]]
-            return (session["username"] + " is logged in")
-    else:
-        return render_template("login.html")
-    return "reee"
+	if "username" in session:
+		return redirect("/welcome")
+	else:
+		return render_template("login.html")
+
+
+@app.route("/welcome")
+def welcome():
+	if "username" in session:
+		return render_template("welcome.html", username = session["username"])
+	else:
+		return redirect("/login")
+
+
+
+@app.route("/auth")
+def auth():
+	command = "SELECT * FROM loginfo WHERE username like '{}'".format(
+		request.args["username"])
+	pair = runsqlcommand(command)
+	print("#######")
+	print(pair)
+	if len(pair) == 0:
+		return "username not found"
+	if pair[0][0] == request.args["username"]:
+		if pair[0][1] == request.args["password"]:
+			session["username"] = request.args["username"]
+			return redirect("/login")
+		return "wrong password"
+	return "wrong username"
+
+
+@app.route("/logout")
+def logout():
+	session.pop("username")
+	return redirect("/login")
+
 
 
 @app.route("/lookup")
 def lookup():
-    if 'user' in session:
-        if request.args:
-            r = urllib.request.urlopen(
-                ""  # Some API link goes here
-            )
-            data = json.loads(r.read())
-            data = data['data'][0]
-            print(data)
-            # print(data['results'][0]['name'])
-            return render_template("lookup.html", data=data)
+	if 'user' in session:
+		if request.args:
+			r = urllib.request.urlopen(
+				""  # Some API link goes here
+			)
+			data = json.loads(r.read())
+			data = data['data'][0]
+			print(data)
+			# print(data['results'][0]['name'])
+			return render_template("lookup.html", data=data)
 
-        else:
-            r = urllib.request.urlopen(
-                ""  # Some API link goes here
-            )
-            data = json.loads(r.read())
-            data = data['data'][0]
-            print(data)
-            # print(data['results'][0]['name'])
-            return render_template("lookup.html", data=data)
+		else:
+			r = urllib.request.urlopen(
+				""  # Some API link goes here
+			)
+			data = json.loads(r.read())
+			data = data['data'][0]
+			print(data)
+			# print(data['results'][0]['name'])
+			return render_template("lookup.html", data=data)
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+	app.debug = True
+	app.run()

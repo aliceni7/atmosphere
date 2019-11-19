@@ -11,18 +11,27 @@
     <nav style="position: sticky; top: 0;">
         <nav class="container-fluid py-3" style="background: #d6e0e4;">
             <div class="row align-items-center justify-content-around">
-                <a class="h3" style="text-decoration: none; color: black;" href="/">Team Atmosphere<a>
                 <a class="" style="justify-self:center;" class="" href="/login"> <button style="justify-self: center;"class="col btn btn-primary">Login</button> </a>
                 <a class="" style="justify-self:center;" class="" href=""> <button style="justify-self: center;"class="col btn btn-primary">Register</button> </a>
                 <a class="" style="justify-self:center;" class="" href=""> <button style="justify-self: center;"class="col btn btn-primary">Go to Atmosphere</button> </a>
-                {% if session %}
-                <a class="" style="justify-self:center;" class="" href=""> <button style="justify-self: center;"class="col btn btn-danger">Logout</button> </a>
-                {% endif %}
             </div>
         </nav>
     </nav>
-    <h3 class="text-center display-4">{% block header%}Atmosphere{% endblock %}</h3>
     {% block content %}
+    <div class="content" style="z-index: -1; position: relative;">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <img class="col col-4 img-fluid" src="./static/img/atmosphere-logo.png"  alt="logo">
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <h1 class="col display-4 text-center">Prepare to Enter the Atmosphere...</h1> 
+            </div>
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore facere voluptates suscipit similique ipsam qui, eos impedit pariatur natus iusto magni voluptatum? Molestias laboriosam, quo sed necessitatibus quos at vel molestiae ullam tempora ut voluptatibus hic soluta minima esse, iusto porro consequuntur reprehenderit vitae facere dolor illum voluptatum, asperiores eaque. Commodi numquam praesentium quasi eaque nihil amet. Facere itaque deserunt unde tenetur, accusamus quod cum, sit velit dolore ab illum quidem corporis nulla quasi, maiores ipsa ratione eos. Nobis laboriosam placeat quibusdam laudantium! Sequi ut alias velit distinctio omnis, dolorem maxime exercitationem ipsa nam veritatis voluptatibus magnam suscipit eius quia.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore facere voluptates suscipit similique ipsam qui, eos impedit pariatur natus iusto magni voluptatum? Molestias laboriosam, quo sed necessitatibus quos at vel molestiae ullam tempora ut voluptatibus hic soluta minima esse, iusto porro consequuntur reprehenderit vitae facere dolor illum voluptatum, asperiores eaque. Commodi numquam praesentium quasi eaque nihil amet. Facere itaque deserunt unde tenetur, accusamus quod cum, sit velit dolore ab illum quidem corporis nulla quasi, maiores ipsa ratione eos. Nobis laboriosam placeat quibusdam laudantium! Sequi ut alias velit distinctio omnis, dolorem maxime exercitationem ipsa nam veritatis voluptatibus magnam suscipit eius quia.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore facere voluptates suscipit similique ipsam qui, eos impedit pariatur natus iusto magni voluptatum? Molestias laboriosam, quo sed necessitatibus quos at vel molestiae ullam tempora ut voluptatibus hic soluta minima esse, iusto porro consequuntur reprehenderit vitae facere dolor illum voluptatum, asperiores eaque. Commodi numquam praesentium quasi eaque nihil amet. Facere itaque deserunt unde tenetur, accusamus quod cum, sit velit dolore ab illum quidem corporis nulla quasi, maiores ipsa ratione eos. Nobis laboriosam placeat quibusdam laudantium! Sequi ut alias velit distinctio omnis, dolorem maxime exercitationem ipsa nam veritatis voluptatibus magnam suscipit eius quia.</p>
+        </div>
+    </div>
     {% endblock %}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

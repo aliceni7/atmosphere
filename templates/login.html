@@ -1,32 +1,17 @@
-{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    {% block title %}Login{% endblock %}
+    <title>title</title>
   </head>
   <body>
-    {% block header %} Login {% endblock %}
-    {% block content %}
-    <div class="container py-3 my-3 border rounded">
-      <form action="/login" method="GET">
-        <div class="form-group justify-content-center">
-          <label for="username">Choose a Username </label>
-          <input type="text" name="username" placeholder="e.g. BigRuss555"> <br><br>
-        </div>
-        <div class="form-group justify-content-center">
-          <label for="password">Enter a Password </label>
-          <input type="text" name="password" placeholder="Password"> <br><br>
-        </div>
-        <div class="form-group justify-content-center">
-          <label for="confirm">Confirm Password </label>
-          <input type="text" name="confirm" placeholder="Confirm Password"> <br><br>
-        </div>
-        <div class="form-group justify-content-center">
-          <button type="submit" name="submit" class="btn btn-primary">SUBMIT LE FORM</button>
-        </div>
-      </form>
-    </div>
-    {% endblock %}
+
+	  <form class="" action="/auth" method="GET">
+		<input type="text" name="username" placeholder="USERNAME HERE"> <br><br>
+		<input type="text" name="password" placeholder="PASSWORD HERE"> <br><br>
+	  	<button type="submit" name="submit">SUBMIT</button>
+	  </form>
+
+	  <a href="/register">REGISTER</a>
   </body>
 </html>
