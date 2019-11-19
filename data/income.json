@@ -1,0 +1,646 @@
+{
+    "BEAAPI": {
+        "Request": {
+            "RequestParam": [
+                {
+                    "ParameterName": "LINECODE",
+                    "ParameterValue": "3"
+                },
+                {
+                    "ParameterName": "YEAR",
+                    "ParameterValue": "2018"
+                },
+                {
+                    "ParameterName": "METHOD",
+                    "ParameterValue": "GETDATA"
+                },
+                {
+                    "ParameterName": "TABLENAME",
+                    "ParameterValue": "SAINC1"
+                },
+                {
+                    "ParameterName": "GEOFIPS",
+                    "ParameterValue": "STATE"
+                },
+                {
+                    "ParameterName": "USERID",
+                    "ParameterValue": "1B07B684-579E-4E91-8517-DA093A82DA43"
+                },
+                {
+                    "ParameterName": "DATASETNAME",
+                    "ParameterValue": "REGIONAL"
+                },
+                {
+                    "ParameterName": "RESULTFORMAT",
+                    "ParameterValue": "JSON"
+                }
+            ]
+        },
+        "Results": {
+            "Statistic": "Per capita personal income",
+            "UnitOfMeasure": "Dollars",
+            "PublicTable": "SAINC1 Per capita personal income (dollars)",
+            "UTCProductionTime": "2019-11-19T21:57:03.423",
+            "NoteRef": "2",
+            "Dimensions": [
+                {
+                    "Name": "Code",
+                    "DataType": "string",
+                    "IsValue": "0"
+                },
+                {
+                    "Name": "GeoFips",
+                    "DataType": "string",
+                    "IsValue": "0"
+                },
+                {
+                    "Name": "GeoName",
+                    "DataType": "string",
+                    "IsValue": "0"
+                },
+                {
+                    "Name": "TimePeriod",
+                    "DataType": "string",
+                    "IsValue": "0"
+                },
+                {
+                    "Name": "DataValue",
+                    "DataType": "numeric",
+                    "IsValue": "1"
+                },
+                {
+                    "Name": "CL_UNIT",
+                    "DataType": "string",
+                    "IsValue": "0"
+                },
+                {
+                    "Name": "UNIT_MULT",
+                    "DataType": "numeric",
+                    "IsValue": "0"
+                }
+            ],
+            "Data": [
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "00000",
+                    "GeoName": "United States",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "54,446"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "01000",
+                    "GeoName": "Alabama",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "42,238"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "02000",
+                    "GeoName": "Alaska*",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "59,420",
+                    "NoteRef": "*"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "04000",
+                    "GeoName": "Arizona",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "44,329"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "05000",
+                    "GeoName": "Arkansas",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "43,233"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "06000",
+                    "GeoName": "California",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "63,557"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "08000",
+                    "GeoName": "Colorado",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "58,456"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "09000",
+                    "GeoName": "Connecticut",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "76,456"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "10000",
+                    "GeoName": "Delaware",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "52,507"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "11000",
+                    "GeoName": "District of Columbia",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "82,005"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "12000",
+                    "GeoName": "Florida",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "50,070"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "13000",
+                    "GeoName": "Georgia",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,482"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "15000",
+                    "GeoName": "Hawaii*",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "55,418",
+                    "NoteRef": "*"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "16000",
+                    "GeoName": "Idaho",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "43,901"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "17000",
+                    "GeoName": "Illinois",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "56,839"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "18000",
+                    "GeoName": "Indiana",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "47,149"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "19000",
+                    "GeoName": "Iowa",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "50,124"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "20000",
+                    "GeoName": "Kansas",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "51,471"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "21000",
+                    "GeoName": "Kentucky",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "42,458"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "22000",
+                    "GeoName": "Louisiana",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,242"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "23000",
+                    "GeoName": "Maine",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "48,905"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "24000",
+                    "GeoName": "Maryland",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "63,354"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "25000",
+                    "GeoName": "Massachusetts",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "71,683"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "26000",
+                    "GeoName": "Michigan",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "48,423"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "27000",
+                    "GeoName": "Minnesota",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "57,515"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "28000",
+                    "GeoName": "Mississippi",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "37,834"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "29000",
+                    "GeoName": "Missouri",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "47,746"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "30000",
+                    "GeoName": "Montana",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "47,538"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "31000",
+                    "GeoName": "Nebraska",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "53,263"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "32000",
+                    "GeoName": "Nevada",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "49,176"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "33000",
+                    "GeoName": "New Hampshire",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "61,294"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "34000",
+                    "GeoName": "New Jersey",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "68,236"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "35000",
+                    "GeoName": "New Mexico",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "41,609"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "36000",
+                    "GeoName": "New York",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "68,668"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "37000",
+                    "GeoName": "North Carolina",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,117"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "38000",
+                    "GeoName": "North Dakota",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "55,452"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "39000",
+                    "GeoName": "Ohio",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "48,739"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "40000",
+                    "GeoName": "Oklahoma",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,233"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "41000",
+                    "GeoName": "Oregon",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "50,843"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "42000",
+                    "GeoName": "Pennsylvania",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "56,225"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "44000",
+                    "GeoName": "Rhode Island",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "54,850"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "45000",
+                    "GeoName": "South Carolina",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "43,702"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "46000",
+                    "GeoName": "South Dakota",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "52,216"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "47000",
+                    "GeoName": "Tennessee",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,900"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "48000",
+                    "GeoName": "Texas",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "50,355"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "49000",
+                    "GeoName": "Utah",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "46,320"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "50000",
+                    "GeoName": "Vermont",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "54,173"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "51000",
+                    "GeoName": "Virginia",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "57,799"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "53000",
+                    "GeoName": "Washington",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "62,026"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "54000",
+                    "GeoName": "West Virginia",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "40,873"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "55000",
+                    "GeoName": "Wisconsin",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "51,592"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "56000",
+                    "GeoName": "Wyoming",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "60,361"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "91000",
+                    "GeoName": "New England",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "67,893"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "92000",
+                    "GeoName": "Mideast",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "64,552"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "93000",
+                    "GeoName": "Great Lakes",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "50,997"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "94000",
+                    "GeoName": "Plains",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "52,125"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "95000",
+                    "GeoName": "Southeast",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "47,337"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "96000",
+                    "GeoName": "Southwest",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "48,499"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "97000",
+                    "GeoName": "Rocky Mountain",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "52,384"
+                },
+                {
+                    "Code": "SAINC1-3",
+                    "GeoFips": "98000",
+                    "GeoName": "Far West",
+                    "TimePeriod": "2018",
+                    "CL_UNIT": "Dollars",
+                    "UNIT_MULT": "0",
+                    "DataValue": "61,378"
+                }
+            ],
+            "Notes": [
+                {
+                    "NoteRef": "2",
+                    "NoteText": "Per capita personal income is total personal income divided by total midyear population."
+                },
+                {
+                    "NoteRef": "*",
+                    "NoteText": "Estimates prior to 1950 are not available for Alaska and Hawaii."
+                },
+                {
+                    "NoteRef": "Note--",
+                    "NoteText": "All dollar estimates are in millions of current dollars (not adjusted for inflation). Calculations are performed on unrounded data."
+                },
+                {
+                    "NoteRef": " ",
+                    "NoteText": "Last updated: September 24, 2019-- revised statistics for 1998-2018."
+                }
+            ]
+        }
+    }
+}

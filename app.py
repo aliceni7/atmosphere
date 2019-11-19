@@ -52,7 +52,12 @@ def login():
 	else:
 		return render_template("login.html")
 
-
+@app.route("/register")
+def register():
+	if "username" in session:
+		return redirect("/welcome")
+	else:
+		return render_template("register.html")
 @app.route("/welcome")
 def welcome():
 	if "username" in session:
@@ -88,26 +93,16 @@ def logout():
 
 @app.route("/lookup")
 def lookup():
-	if 'user' in session:
-		if request.args:
-			r = urllib.request.urlopen(
-				""  # Some API link goes here
-			)
-			data = json.loads(r.read())
-			data = data['data'][0]
-			print(data)
-			# print(data['results'][0]['name'])
-			return render_template("lookup.html", data=data)
-
-		else:
-			r = urllib.request.urlopen(
-				""  # Some API link goes here
-			)
-			data = json.loads(r.read())
-			data = data['data'][0]
-			print(data)
-			# print(data['results'][0]['name'])
-			return render_template("lookup.html", data=data)
+	r = urllib.request.urlopen(
+		"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
+	)
+	data = json.loads(r.read())
+	print(data)
+	# caches data to the data/ directory
+	with open('./data/income.json', 'w') as outfile:
+		json.dump(data, outfile, indent=4)
+	# print(data['results'][0]['name'])
+	return render_template("lookup.html", data=data)
 
 
 if __name__ == "__main__":
