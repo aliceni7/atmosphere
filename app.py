@@ -61,13 +61,16 @@ def register():
 		existence_command = "SELECT * FROM loginfo WHERE username LIKE '{}'".format(username)
 		names = runsqlcommand(existence_command)
 		if len(names) != 0:
-			return "username already in"
+			flash("username already in")
+			return redirect("/register")
 		if password != confirm:
-			return "password and confirmation dont match"
+			flash("password and confirmation dont match")
+			return redirect("/register")
 		else:
 			insert_username = "INSERT INTO loginfo VALUES ('{}', '{}')".format(username, password)
 			runsqlcommand(insert_username)
-			return "registered!"
+			flash("successful registration")
+			return redirect("/login")
 	if "username" in session:
 		return redirect("/welcome")
 	else:
