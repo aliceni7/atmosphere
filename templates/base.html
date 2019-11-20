@@ -15,8 +15,8 @@
                 <a class="" style="justify-self:center;" class="" href="/login"> <button style="justify-self: center;"class="col btn btn-primary">Login</button> </a>
                 <a class="" style="justify-self:center;" class="" href="/register"> <button style="justify-self: center;"class="col btn btn-primary">Register</button> </a>
                 <a class="" style="justify-self:center;" class="" href="/lookup"> <button style="justify-self: center;"class="col btn btn-primary">Go to Atmosphere</button> </a>
-                {% if session %}
-                <a class="" style="justify-self:center;" class="" href=""> <button style="justify-self: center;"class="col btn btn-danger">Logout</button> </a>
+                {% if username %}
+                <a class="" style="justify-self:center;" class="" href="/logout"> <button style="justify-self: center;"class="col btn btn-danger">Logout</button> </a>
                 {% endif %}
             </div>
         </nav>

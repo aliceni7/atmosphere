@@ -58,13 +58,14 @@ def register():
 		return redirect("/welcome")
 	else:
 		return render_template("register.html")
+
+
 @app.route("/welcome")
 def welcome():
 	if "username" in session:
 		return render_template("welcome.html", username = session["username"])
 	else:
 		return redirect("/login")
-
 
 
 @app.route("/auth")
