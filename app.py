@@ -98,9 +98,13 @@ def lookup():
 	)
 	data = json.loads(r.read())
 	print(data)
+
+	# CACHING MUST BE DONE WITH Flask-Caching
+
+	# session['IncomeCache'] = data
 	# caches data to the data/ directory
-	with open('./data/income.json', 'w') as outfile:
-		json.dump(data, outfile, indent=4)
+	# with open('./data/income.json', 'w') as outfile:
+	# 	json.dump(data, session['IncomeCache'], indent=4)
 	# print(data['results'][0]['name'])
 	return render_template("lookup.html", data=data)
 
