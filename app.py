@@ -98,8 +98,9 @@ def lookup():
 		"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
 	)
 	data = json.loads(r.read())
-	print(data)
 
+	for member in data:
+		print(member + "\n")
 	# CACHING MUST BE DONE WITH Flask-Caching
 
 	# session['IncomeCache'] = data
