@@ -11,8 +11,9 @@
     {% block content %}
         <form action="/lookup">
             <select name="state" id="select-state">
-                {% for  %}
-                <option value=""></option>
+                {% for  member in states %}
+                    <option value="{{states['member']}}">{{member}}</option>
+                {% endfor %}
             </select>
         </form>
         {% if data %}

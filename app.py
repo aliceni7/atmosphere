@@ -18,10 +18,10 @@ import sqlite3
 import os
 
 states = {}
-reader = csv.reader(open("./data/M49.csv", "r"))
-# for row in reader:
-# print(row)
-# m49[row[0]] = row[1]
+reader = csv.reader(open("./data/states.csv", "r"))
+for row in reader:
+	print(row)
+	states[row[0]] = row[1]
 
 # print(m49)
 
@@ -134,7 +134,7 @@ def lookup():
 		# with open('./data/income.json', 'w') as outfile:
 		# 	json.dump(data, session['IncomeCache'], indent=4)
 		# print(data['results'][0]['name'])
-		return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'], username=session['username'], states= ...)
+		return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'], username=session['username'], states=states)
 	return redirect("/login")
 
 if __name__ == "__main__":
