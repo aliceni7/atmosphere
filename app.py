@@ -54,11 +54,27 @@ def login():
 
 @app.route("/register")
 def register():
+	if len(request.args) > 0:
+		username = request.args["username"]
+		password = request.args["password"]
+		confirm = request.args["confirm"]
+		existence_command = "SELECT * FROM loginfo WHERE username LIKE '{}'".format(username)
+		names = runsqlcommand(existence_command)
+		if len(names) != 0:
+			flash("username already in")
+			return redirect("/register")
+		if password != confirm:
+			flash("password and confirmation dont match")
+			return redirect("/register")
+		else:
+			insert_username = "INSERT INTO loginfo VALUES ('{}', '{}')".format(username, password)
+			runsqlcommand(insert_username)
+			flash("successful registration")
+			return redirect("/login")
 	if "username" in session:
 		return redirect("/welcome")
 	else:
 		return render_template("register.html")
-
 
 @app.route("/welcome")
 def welcome():
@@ -70,7 +86,7 @@ def welcome():
 
 @app.route("/auth")
 def auth():
-	command = "SELECT * FROM loginfo WHERE username like '{}'".format(
+	command = "SELECT * FROM loginfo WHERE username LIKE '{}'".format(
 		request.args["username"])
 	pair = runsqlcommand(command)
 	print("#######")

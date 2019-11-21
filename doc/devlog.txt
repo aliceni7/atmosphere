@@ -1,3 +1,9 @@
+aliceN -- 2019-11-21 09:03
+To make more awesome, we're going to write code as succint and easy to read
+as possible because that allows others to read code and evaluate 
+them quickly and easily. Updating the design doc frequently to reflect new ideas
+and changes allows others to be aware of changes made and adjust accordingly.
+
 aliceN -- 2019-11-18 23:54
 To the design doc, added: specific bootstrap features to implement, 
 explanation of how we store our data and how to access it, 
