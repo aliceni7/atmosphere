@@ -17,8 +17,8 @@ import csv
 import sqlite3
 import os
 
-# m49 = {}
-# reader = csv.reader(open("./data/M49.csv", "r"))
+states = {}
+reader = csv.reader(open("./data/M49.csv", "r"))
 # for row in reader:
 # print(row)
 # m49[row[0]] = row[1]
@@ -81,7 +81,7 @@ def welcome():
 	if "username" in session:
 		r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key=07626e3b3578edd0e55ba15cb38770a85aedd31d")
 		data = json.loads(r.read())
-		return render_template("welcome.html", population = data[1][0])
+		return render_template("welcome.html", population = data[1][0], username=session['username'])
 	else:
 		return redirect("/login")
 
@@ -129,7 +129,7 @@ def lookup():
 		# with open('./data/income.json', 'w') as outfile:
 		# 	json.dump(data, session['IncomeCache'], indent=4)
 		# print(data['results'][0]['name'])
-		return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'])
+		return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'], username=session['username'], states= ...)
 	return redirect("/login")
 
 if __name__ == "__main__":

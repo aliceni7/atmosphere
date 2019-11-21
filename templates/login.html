@@ -9,6 +9,15 @@
     {% block header %} Login {% endblock %}
     {% block content %}
     <div class="container py-3 my-3 border rounded">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
       <form action="/auth" method="GET">
         <div class="form-group justify-content-center">
           <label for="username">Username </label>
