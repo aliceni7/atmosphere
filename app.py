@@ -94,18 +94,23 @@ def auth():
 	print("#######")
 	print(pair)
 	if len(pair) == 0:
+		flash("username not found")
 		return "username not found"
 	if pair[0][0] == request.args["username"]:
 		if pair[0][1] == request.args["password"]:
 			session["username"] = request.args["username"]
-			return redirect("/login")
-		return "wrong password"
-	return "wrong username"
+			flash("logged in alright")
+			return redirect("/welcome")
+		flash("wrong password")
+		return redirect("/login")
+	flash("wrong username")
+	return redirect("/login")
 
 
 @app.route("/logout")
 def logout():
 	session.pop("username")
+	flash("logged out successfully")
 	return redirect("/login")
 
 
