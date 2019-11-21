@@ -9,7 +9,16 @@
 </head>
 <body>
     {% block content %}
-        {{data}}
+        <form action="/lookup">
+            <select name="" id="">
+                
+            </select>
+        </form>
+        {% if data %}
+            {% for member in data %}
+                <h3>{{member['GeoName']}}: {{member['DataValue']}}$</h3>
+            {% endfor %}
+        {% endif %}
     {% endblock %}
 </body>
 </html>
