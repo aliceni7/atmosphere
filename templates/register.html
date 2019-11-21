@@ -9,6 +9,16 @@
     {% block header %} Register {% endblock %}
     {% block content %}
     <div class="container py-3 my-3 border rounded">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+          {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}
       <form action="/register" method="GET">
         <div class="form-group justify-content-center">
           <label for="username">Choose a Username: </label>
