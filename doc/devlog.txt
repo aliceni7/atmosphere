@@ -1,3 +1,8 @@
+josephY -- 2019-11-21 23:50
+Working implementation of BEA API, allowing the user to select a state to lookup per-
+capita income from. Next steps are to incorporate a climate indicator, such as tons of CO2,
+and generate a graph. Possible analysis tools: Correlation Coefficient, comparison accross states
+
 josephY -- 2019-11-21 10:30
 DC was missing from states.csv, so I added it. Added drowpdown in lookup.
 

@@ -9,18 +9,26 @@
 </head>
 <body>
     {% block content %}
+    <div class="container">
+
         <form action="/lookup">
-            <select name="state" id="select-state">
-                {% for  member in states %}
-                    <option value="{{states['member']}}">{{member}}</option>
-                {% endfor %}
-            </select>
+            <div class="form-group">
+                <label for="state"> <h4>Retrieve Per-Capita Income by State: </h4> </label>
+                <select name="state" id="select-state">
+                    {% for  member in states.items() %}
+                    <option value="{{member[1]}}">{{member[0]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Get Stats</button>
         </form>
         {% if data %}
-            {% for member in data %}
-                <h3>{{member['GeoName']}}: {{member['DataValue']}}$</h3>
-            {% endfor %}
+        <!-- {% for member in data %}
+            <h3>{{member['GeoName']}}: {{member['DataValue']}}$</h3>
+            {% endfor %} -->
+            <h4>{{data['GeoName']}}: {{data['DataValue']}}$</h4>
         {% endif %}
+    </div>
     {% endblock %}
 </body>
 </html>

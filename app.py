@@ -99,7 +99,7 @@ def auth():
 	if pair[0][0] == request.args["username"]:
 		if pair[0][1] == request.args["password"]:
 			session["username"] = request.args["username"]
-			flash("logged in alright")
+			flash("Successfully Logged In as: {}".format(session['username']))
 			return redirect("/welcome")
 		flash("wrong password")
 		return redirect("/login")
@@ -119,22 +119,23 @@ def logout():
 def lookup():
 	if 'username' in session:
 		if request.args:
-			dothis()
-		r = urllib.request.urlopen(
-			"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
-		)
-		data = json.loads(r.read())
-		print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
-		# for member in data:
-			# print(member + "\n")
-		# CACHING MUST BE DONE WITH Flask-Caching
+			r = urllib.request.urlopen(
+				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
+			)
+			data = json.loads(r.read())
+			# print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
+			# print("This should be state ID: {}".format(request.args.get('state')))
+			# for member in data:
+				# print(member + "\n")
+			# CACHING MUST BE DONE WITH Flask-Caching
 
-		# session['IncomeCache'] = data
-		# caches data to the data/ directory
-		# with open('./data/income.json', 'w') as outfile:
-		# 	json.dump(data, session['IncomeCache'], indent=4)
-		# print(data['results'][0]['name'])
-		return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'], username=session['username'], states=states)
+			# session['IncomeCache'] = data
+			# caches data to the data/ directory
+			# with open('./data/income.json', 'w') as outfile:
+			# 	json.dump(data, session['IncomeCache'], indent=4)
+			# print(data['results'][0]['name'])
+			return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'][int(request.args.get('state'))], username=session['username'], states=states)
+		return render_template("lookup.html", username=session['username'], states=states)
 	return redirect("/login")
 
 if __name__ == "__main__":
