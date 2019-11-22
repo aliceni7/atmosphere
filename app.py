@@ -122,7 +122,11 @@ def lookup():
 			r = urllib.request.urlopen(
 				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
 			)
-			data = json.loads(r.read())
+			income = json.loads(r.read())
+
+			p = urllib.request.urlopen(
+				""
+			)
 			# print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
 			# print("This should be state ID: {}".format(request.args.get('state')))
 			# for member in data:
@@ -134,7 +138,7 @@ def lookup():
 			# with open('./data/income.json', 'w') as outfile:
 			# 	json.dump(data, session['IncomeCache'], indent=4)
 			# print(data['results'][0]['name'])
-			return render_template("lookup.html", data=data['BEAAPI']['Results']['Data'][int(request.args.get('state'))], username=session['username'], states=states)
+			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], username=session['username'], states=states)
 		return render_template("lookup.html", username=session['username'], states=states)
 	return redirect("/login")
 
