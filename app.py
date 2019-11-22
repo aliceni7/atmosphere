@@ -124,9 +124,9 @@ def lookup():
 			)
 			income = json.loads(r.read())
 
-			p = urllib.request.urlopen(
-				""
-			)
+			# p = urllib.request.urlopen(
+			# 	""
+			# )
 			# print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
 			# print("This should be state ID: {}".format(request.args.get('state')))
 			# for member in data:
