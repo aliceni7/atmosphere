@@ -21,7 +21,8 @@ The APIs:
 
 ---
 ## Instructions
-1. Clone the repo
-2. Install the necessary packages using $ pip3 install -r requirements.txt
-3. Run app.py
-4. Explore the ATMO
+1. Clone and cd into the repo
+2. Set up a virtual environment using `$ python3 -m venv .`
+3. Install the necessary packages using `$ pip3 install -r requirements.txt`
+4. Run app.py
+5. Explore the ATMO
