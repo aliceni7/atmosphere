@@ -69,7 +69,7 @@ def register():
 		else:
 			insert_username = "INSERT INTO loginfo VALUES ('{}', '{}')".format(username, password)
 			runsqlcommand(insert_username)
-			flash("successful registration")
+			flash("Successful Registration")
 			return redirect("/login")
 	if "username" in session:
 		return redirect("/welcome")
