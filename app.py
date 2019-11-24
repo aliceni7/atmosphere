@@ -136,6 +136,10 @@ def lookup():
 				"https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format( alpha )
 			)
 			co2 = json.loads(p.read())
+
+			f = "http://flags.ox3.in/svg/us/{}.svg".format( alpha.lower() )
+
+			print(f)
 			# print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
 			# print("This should be state ID: {}".format(request.args.get('state')))
 			# for member in data:
@@ -147,7 +151,7 @@ def lookup():
 			# with open('./data/income.json', 'w') as outfile:
 			# 	json.dump(data, session['IncomeCache'], indent=4)
 			# print(data['results'][0]['name'])
-			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], co2=co2, username=session['username'], states=states)
+			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], co2=co2, username=session['username'], states=states, flag=f)
 		return render_template("lookup.html", username=session['username'], states=states)
 	flash("Log in to use Atmo.")
 	return redirect("/login")

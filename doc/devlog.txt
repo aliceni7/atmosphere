@@ -1,3 +1,8 @@
+josephY -- 2019-11-24 01:00
+Succesfully implemented the U.S. Energy Information Administration API, as well as a nifty flags API. Lookup
+by state now gives two statistics, Per Capita income, and Industrial carbon emissions, as well as an image of
+the state flag of the state being looked up. Changes reflected in README.
+
 aliceN -- 2019-11-22 09:26
 Updated instructions, added hyperlinks to APIs, updated design doc
 
