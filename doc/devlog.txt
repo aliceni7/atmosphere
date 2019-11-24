@@ -1,3 +1,7 @@
+josephY -- 2019-11-24 12:15
+New variable: State GDP from the BEAAPI. Weird x4 thing because there is an entry in the dataset for every quarter,
+rather than every year, but it seems to work. Flags API was messed up, fixed that as well.
+
 josephY -- 2019-11-24 01:00
 Succesfully implemented the U.S. Energy Information Administration API, as well as a nifty flags API. Lookup
 by state now gives two statistics, Per Capita income, and Industrial carbon emissions, as well as an image of

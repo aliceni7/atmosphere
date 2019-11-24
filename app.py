@@ -125,12 +125,18 @@ def logout():
 def lookup():
 	if 'username' in session:
 		if request.args:
+			print("\n{}".format(request.args.get('state')))
 			alpha = IDtoAlpha[request.args.get('state')]
 			print("##########\n{}".format(alpha))
 			r = urllib.request.urlopen(
 				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
 			)
 			income = json.loads(r.read())
+
+			g = urllib.request.urlopen(
+				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SQGDP2&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
+			)
+			gdp = json.loads(g.read())
 
 			p = urllib.request.urlopen(
 				"https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format( alpha )
@@ -151,7 +157,7 @@ def lookup():
 			# with open('./data/income.json', 'w') as outfile:
 			# 	json.dump(data, session['IncomeCache'], indent=4)
 			# print(data['results'][0]['name'])
-			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], co2=co2, username=session['username'], states=states, flag=f)
+			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(4 * int(request.args.get('state')))], co2=co2, username=session['username'], states=states, flag=f, selected=request.args.get('state'))
 		return render_template("lookup.html", username=session['username'], states=states)
 	flash("Log in to use Atmo.")
 	return redirect("/login")
