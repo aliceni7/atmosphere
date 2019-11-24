@@ -23,6 +23,12 @@ for row in reader:
 	print(row)
 	states[row[0]] = row[1]
 
+IDtoAlpha = {}
+reader = csv.reader(open("./data/id-to-alpha.csv", "r"))
+for row in reader:
+	print(row)
+	IDtoAlpha[row[0]] = row[1]
+
 # print(m49)
 
 app = Flask(__name__)  # create instance of class Flask
@@ -119,14 +125,17 @@ def logout():
 def lookup():
 	if 'username' in session:
 		if request.args:
+			alpha = IDtoAlpha[request.args.get('state')]
+			print("##########\n{}".format(alpha))
 			r = urllib.request.urlopen(
-				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2018&ResultFormat=JSON"  # Some API link goes here
+				"https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
 			)
 			income = json.loads(r.read())
 
-			# p = urllib.request.urlopen(
-			# 	""
-			# )
+			p = urllib.request.urlopen(
+				"https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format( alpha )
+			)
+			co2 = json.loads(p.read())
 			# print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
 			# print("This should be state ID: {}".format(request.args.get('state')))
 			# for member in data:
@@ -138,8 +147,9 @@ def lookup():
 			# with open('./data/income.json', 'w') as outfile:
 			# 	json.dump(data, session['IncomeCache'], indent=4)
 			# print(data['results'][0]['name'])
-			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], username=session['username'], states=states)
+			return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], co2=co2, username=session['username'], states=states)
 		return render_template("lookup.html", username=session['username'], states=states)
+	flash("Log in to use Atmo.")
 	return redirect("/login")
 
 if __name__ == "__main__":

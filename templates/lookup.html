@@ -8,13 +8,14 @@
     {% block title %}Lookup By State{% endblock %}
 </head>
 <body>
+    {% block header %}Stats By State{% endblock %}
     {% block content %}
     <div class="container">
 
-        <form action="/lookup">
+        <form action="/lookup" class="my-4">
             <div class="form-group">
-                <label for="state"> <h4>Retrieve Per-Capita Income by State: </h4> </label>
-                <select name="state" id="select-state">
+                <label for="state"> <h4>Select a state to retrieve statistics</h4> </label>
+                <select class="form-control" name="state" id="select-state">
                     {% for  member in states.items() %}
                     <option value="{{member[1]}}">{{member[0]}}</option>
                     {% endfor %}
@@ -23,11 +24,28 @@
             <button class="btn btn-primary" type="submit">Get Stats</button>
         </form>
         {% if income %}
-        <!-- {% for member in data %}
-            <h3>{{member['GeoName']}}: {{member['DataValue']}}$</h3>
-            {% endfor %} -->
-            <h4>{{income['GeoName']}}: ${{income['DataValue']}}</h4>
+            <div class="card text-center">
+                <div class="card-header">
+                    {{income['GeoName']}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Per Capita Income in 2017</h5>
+                    <p class="card-text">${{income['DataValue']}}</p>
+                    <hr>
+                    <!-- <h4>{{income['GeoName']}}: ${{income['DataValue']}}</h4> -->
         {% endif %}
+        {% if co2 %}
+            <!-- <h4>Industrial carbon dioxide emissions, all fuels, in {{co2['series'][0]['data'][0][0]}}</h4> -->
+            <!-- <h3>{{co2['series'][0]['data'][0][1]}} million metric tons CO2</h3> -->
+                    <h5 class="card-title">Industrial carbon dioxide emissions, all fuels, in {{co2['series'][0]['data'][0][0]}}</h5>
+                    <p class="card-text">{{co2['series'][0]['data'][0][1]}} million metric tons CO2</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Data Retrieved from U.S. Energy Information Administration, Bureau of Economic Analysis.
+                </div>
+            </div>        <!--  -->
+        {% endif %}
+
     </div>
     {% endblock %}
 </body>
