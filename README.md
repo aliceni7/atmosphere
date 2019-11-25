@@ -18,6 +18,7 @@ The APIs:
 * [U.S. Bureau for Economic Analysis API](https://docs.google.com/document/d/1g3ibKHeBFja4R4szFoPYfswihYXJ0HpGe2nXMN_8ckE/edit#)
 * [U.S. Energy Information Administration API](https://docs.google.com/document/d/1I9Up6w6PoT6kRDshKzWn7JoBalNl5T3mAFjHKmUxT9Y/edit#heading=h.3zf63kd5qt0p)
 * [oxguy3's "flags" API](https://docs.google.com/document/d/1uh7GITcbu4iNEoFpAYVFt7I-C0jU0b6ZAmUBcHjgLfA/edit#)
+* [CanvasJS Graphing API -- NO CARD](https://canvasjs.com)
 <!-- * [Global Climate API](https://docs.google.com/document/d/1CvFv1Q_0SfxrEuPBuJr8nTdbQkddFTHtA788ky1iZcU/edit#)  -->
 <!-- * [Census Bureau API](https://docs.google.com/document/d/1-UxHm1mxvERz83oVVYm8hOkqvJfw1di6ub-_fPHw4XU/edit#heading=h.gkfplvc4i8hr) -->
 
