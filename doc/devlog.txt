@@ -1,3 +1,13 @@
+aliceN -- 2019-11-25
+HOME STRETCH PLAN
+  - Generate a scattergram that compares specified data from two states and displays data in table (Nov. 29, Joseph)
+  - Complete the API cards (Nov. 27, David, Alice)
+  - Complete the Home Page and what will be displayed upon user login (Nov. 29, David)
+  - Cache API information into databases (Dec. 1, Moody)
+If we are "finished":
+  - Add user data specific functionality such as favorite states (Dec. 1)
+  - Add tables along with the scattergrams that display numerical data (Dec. 1)
+
 josephY -- 2019-11-24 12:15
 New variable: State GDP from the BEAAPI. Weird x4 thing because there is an entry in the dataset for every quarter,
 rather than every year, but it seems to work. Flags API was messed up, fixed that as well.
