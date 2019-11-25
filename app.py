@@ -189,6 +189,10 @@ def analysis():
             co2 = json.loads(p.read())
 
             f = "http://flags.ox3.in/svg/us/{}.svg".format(alpha.lower())
+        return render_template("analysis.html", username=session['username'], states=states)
+    flash("Log in to use Atmo.")
+    return redirect("/login")
+
 
 
 if __name__ == "__main__":
