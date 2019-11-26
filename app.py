@@ -138,7 +138,7 @@ def lookup():
             income = json.loads(r.read())
 
             g = urllib.request.urlopen(
-                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SQGDP2&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
+                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
             )
             gdp = json.loads(g.read())
 
@@ -162,7 +162,7 @@ def lookup():
             # with open('./data/income.json', 'w') as outfile:
             # 	json.dump(data, session['IncomeCache'], indent=4)
             # print(data['results'][0]['name'])
-            return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(4 * int(request.args.get('state')))], co2=co2, username=session['username'], states=states, flag=f, selected=request.args.get('state'))
+            return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(int(request.args.get('state')))], co2=co2, username=session['username'], states=states, flag=f, selected=request.args.get('state'))
         return render_template("lookup.html", username=session['username'], states=states)
     flash("Log in to use Atmo.")
     return redirect("/login")
@@ -171,25 +171,31 @@ def lookup():
 @app.route("/analysis")
 def analysis():
     if 'username' in session:
-        if request.args:
-            r = urllib.request.urlopen(
-                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
-            )
-            income = json.loads(r.read())
+        r = urllib.request.urlopen(
+            "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
+        )
+        income = json.loads(r.read())
 
-            g = urllib.request.urlopen(
-                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SQGDP2&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
-            )
-            gdp = json.loads(g.read())
+        g = urllib.request.urlopen(
+            "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
+        )
+        gdp = json.loads(g.read())
 
-            p = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format(
-                    alpha)
-            )
-            co2 = json.loads(p.read())
+        p = urllib.request.urlopen(
+            "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A"
+        )
+        co2 = json.loads(p.read())
 
-            f = "http://flags.ox3.in/svg/us/{}.svg".format(alpha.lower())
-        return render_template("analysis.html", username=session['username'], states=states)
+        f = "http://flags.ox3.in/svg/us/US.svg"
+        variables = {}
+        indVars = []
+        indVars.append(income['BEAAPI']['Results']['Statistic'])
+        indVars.append(gdp['BEAAPI']['Results']['Statistic'])
+        depVars = []
+        depVars.append(co2['series'][0]['name'])
+        variables['x'] = indVars
+        variables['y'] = depVars
+        return render_template("analysis.html", username=session['username'], variables=variables)
     flash("Log in to use Atmo.")
     return redirect("/login")
 

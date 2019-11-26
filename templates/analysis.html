@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% block titlw %}Analysis{% endblock %}
+{% block title %}Analysis{% endblock %}
 {% block header %}Analysis{% endblock %}
 {% block graph %}
+{% if graph %}
     <script>
         window.onload = function () {
 
@@ -9,12 +10,12 @@
                 animationEnabled: true,
                 zoomEnabled: true,
                 title: {
-                    text: "Real Estate Rates"
+                    text: "Blah"
                 },
                 axisX: {
                     title: "Area (in sq. ft)",
-                    minimum: 790,
-                    maximum: 2260
+                    // minimum: 790,
+                    // maximum: 2260
                 },
                 axisY: {
                     title: "Price (in USD)",
@@ -55,10 +56,40 @@
 
         }
     </script>
+{% endif %}
 {% endblock %}
 {% block content %}
+{% if graph %}
 <div class="container">
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
+{% endif %}
+<div class="container">
+
+    <form action="/analysis" class="my-4">
+        <div class="form-group">
+            <label for="xVar">
+                <h4>Select an Independant Variable:</h4>
+            </label>
+            <select class="form-control" name="xVar" id="xVar">
+                {% for  member in variables['x'] %}
+                <option value="{{member}}">{{member}}</option>
+                {% endfor %}
+            </select>    
+        </div>
+        <div class="form-group">
+            <label for="yVar">
+                <h4>Select an Dependant Variable:</h4>
+            </label>
+            <select class="form-control" name="yVar" id="yVar">
+                {% for  member in variables['y'] %}
+                <option value="{{member}}">{{member}}</option>
+                {% endfor %}
+            </select>    
+        </div>
+        <button class="btn btn-primary" type="submit">Get Stats</button>
+    </form>
+</div>
+
 {% endblock %}
