@@ -1,4 +1,8 @@
-jospephY -- 2019-11-25 10:15
+josephY -- 2019-11-26 00:20
+Template for analysis page, need to figure out how to pass data to the template in order to generate 
+the graph. As of right now, only the form works.
+
+josephY -- 2019-11-25 10:15
 Added boilerplate code for a scatterplot in the analysis section, using CanvasJS.
 
 aliceN -- 2019-11-25
