@@ -1,8 +1,11 @@
-josephY -- 2019-11-26 09:30
-Considering caching carbon data in a served JSON file, rather than making 50 requests to the API. That would be problematic.
+aliceN -- 2019-11-16 9:24
+Updated design doc to reflect current file names and APIs in use. Made the slider functionality optional and edited the scattergrams to only take in two variables and have each point on the scattergram be specific to one state.
+
+wangD -- 2019-11-26 8:56
+Home page displays more statistics
 
 josephY -- 2019-11-26 00:20
-Template for analysis page, need to figure out how to pass data to the template in order to generate 
+Template for analysis page, need to figure out how to pass data to the template in order to generate
 the graph. As of right now, only the form works.
 
 josephY -- 2019-11-25 10:15
@@ -17,6 +20,7 @@ HOME STRETCH PLAN
 If we are "finished":
   - Add user data specific functionality such as favorite states (Dec. 1)
   - Add tables along with the scattergrams that display numerical data (Dec. 1)
+  - Add sliders that allow the users to move through time and view scattergram data through time (extra)
 
 josephY -- 2019-11-24 12:15
 New variable: State GDP from the BEAAPI. Weird x4 thing because there is an entry in the dataset for every quarter,
@@ -35,11 +39,15 @@ Working implementation of BEA API, allowing the user to select a state to lookup
 capita income from. Next steps are to incorporate a climate indicator, such as tons of CO2,
 and generate a graph. Possible analysis tools: Correlation Coefficient, comparison accross states
 
+wangD -- 2019-11-21 15:31
+Welcome page displays welcome message and US population, flashes successful sign
+in if user just signed in.
+
 josephY -- 2019-11-21 10:30
 DC was missing from states.csv, so I added it. Added drowpdown in lookup.
 
 josephY -- 2019-11-21 09:30
-Began making states API, programmes message flashing into templates for login and resigser. states.csv 
+Began making states API, programmes message flashing into templates for login and resigser. states.csv
 needs to be incremented by 1!!!
 
 moodyR -- 2019-11-21 09:04
