@@ -1,32 +1,42 @@
+wangD -- 2019-11-26 8:46
+Home page displays more statistics
+
 josephY -- 2019-11-24 12:15
-New variable: State GDP from the BEAAPI. Weird x4 thing because there is an entry in the dataset for every quarter,
-rather than every year, but it seems to work. Flags API was messed up, fixed that as well.
+New variable: State GDP from the BEAAPI. Weird x4 thing because there is an
+entry in the dataset for every quarter, rather than every year, but it seems to
+work. Flags API was messed up, fixed that as well.
 
 josephY -- 2019-11-24 01:00
-Succesfully implemented the U.S. Energy Information Administration API, as well as a nifty flags API. Lookup
-by state now gives two statistics, Per Capita income, and Industrial carbon emissions, as well as an image of
-the state flag of the state being looked up. Changes reflected in README.
+Successfully implemented the U.S. Energy Information Administration API, as well
+as a nifty flags API. Lookup by state now gives two statistics, Per Capita
+income, and Industrial carbon emissions, as well as an image of the state flag
+of the state being looked up. Changes reflected in README.
 
 aliceN -- 2019-11-22 09:26
 Updated instructions, added hyperlinks to APIs, updated design doc
 
 josephY -- 2019-11-21 23:50
-Working implementation of BEA API, allowing the user to select a state to lookup per-
-capita income from. Next steps are to incorporate a climate indicator, such as tons of CO2,
-and generate a graph. Possible analysis tools: Correlation Coefficient, comparison accross states
+Working implementation of BEA API, allowing the user to select a state to lookup
+per-capita income from. Next steps are to incorporate a climate indicator, such
+as tons of CO2, and generate a graph. Possible analysis tools: Correlation
+Coefficient, comparison across states
+
+wangD -- 2019-11-21 15:31
+Welcome page displays welcome message and US population, flashes successful sign
+in if user just signed in.
 
 josephY -- 2019-11-21 10:30
-DC was missing from states.csv, so I added it. Added drowpdown in lookup.
+DC was missing from states.csv, so I added it. Added dropdown in lookup.
 
 josephY -- 2019-11-21 09:30
-Began making states API, programmes message flashing into templates for login and resigser. states.csv 
-needs to be incremented by 1!!!
+Began making states API, programmed message flashing into templates for login
+and register. states.csv needs to be incremented by 1!!!
 
 moodyR -- 2019-11-21 09:04
 Put some of the finishing touches on the login-registration
 
 aliceN -- 2019-11-21 09:03
-To make more awesome, we're going to write code as succint and easy to read
+To make more awesome, we're going to write code as succinct and easy to read
 as possible because that allows others to read code and evaluate
 them quickly and easily. Updating the design doc frequently to reflect new ideas
 and changes allows others to be aware of changes made and adjust accordingly.

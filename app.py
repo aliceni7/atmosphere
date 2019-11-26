@@ -67,15 +67,15 @@ def register():
 		existence_command = "SELECT * FROM loginfo WHERE username LIKE '{}'".format(username)
 		names = runsqlcommand(existence_command)
 		if len(names) != 0:
-			flash("username already in")
+			flash("Username already taken")
 			return redirect("/register")
 		if password != confirm:
-			flash("password and confirmation dont match")
+			flash("Password and confirmation don't match")
 			return redirect("/register")
 		else:
 			insert_username = "INSERT INTO loginfo VALUES ('{}', '{}')".format(username, password)
 			runsqlcommand(insert_username)
-			flash("Successful Registration")
+			flash("Successful registration")
 			return redirect("/login")
 	if "username" in session:
 		return redirect("/welcome")
@@ -86,8 +86,12 @@ def register():
 def welcome():
 	if "username" in session:
 		r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key=07626e3b3578edd0e55ba15cb38770a85aedd31d")
-		data = json.loads(r.read())
-		return render_template("welcome.html", population = data[1][0], username=session['username'])
+		data = [json.loads(r.read())[1][0]]
+		r = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
+		data.append(json.loads(r.read())[1][1])
+		r = urllib.request.urlopen("https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A")
+		data.append(json.loads(r.read())["series"][0]["data"][0][1])
+		return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], username=session['username'])
 	else:
 		return redirect("/login")
 
@@ -100,23 +104,23 @@ def auth():
 	print("#######")
 	print(pair)
 	if len(pair) == 0:
-		flash("username not found")
+		flash("Username not found")
 		return "username not found"
 	if pair[0][0] == request.args["username"]:
 		if pair[0][1] == request.args["password"]:
 			session["username"] = request.args["username"]
-			flash("Successfully Logged In as: {}".format(session['username']))
+			flash("Successfully logged in as: {}".format(session['username']))
 			return redirect("/welcome")
-		flash("wrong password")
+		flash("Wrong password")
 		return redirect("/login")
-	flash("wrong username")
+	flash("Wrong username")
 	return redirect("/login")
 
 
 @app.route("/logout")
 def logout():
 	session.pop("username")
-	flash("logged out successfully")
+	flash("Logged out successfully")
 	return redirect("/login")
 
 
@@ -141,6 +145,7 @@ def lookup():
 			p = urllib.request.urlopen(
 				"https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format( alpha )
 			)
+			print("https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format( alpha ))
 			co2 = json.loads(p.read())
 
 			f = "http://flags.ox3.in/svg/us/{}.svg".format( alpha.lower() )
