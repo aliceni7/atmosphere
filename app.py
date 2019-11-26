@@ -182,7 +182,7 @@ def analysis():
         gdp = json.loads(g.read())
 
         p = urllib.request.urlopen(
-            "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A"
+            "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-US.A"
         )
         co2 = json.loads(p.read())
 

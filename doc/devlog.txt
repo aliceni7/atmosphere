@@ -1,3 +1,6 @@
+josephY -- 2019-11-26 09:30
+Considering caching carbon data in a served JSON file, rather than making 50 requests to the API. That would be problematic.
+
 josephY -- 2019-11-26 00:20
 Template for analysis page, need to figure out how to pass data to the template in order to generate 
 the graph. As of right now, only the form works.
