@@ -1,3 +1,6 @@
+aliceN -- 2019-11-16 9:24
+Updated design doc to reflect current file names and APIs in use. Made the slider functionality optional and edited the scattergrams to only take in two variables and have each point on the scattergram be specific to one state. 
+
 wangD -- 2019-11-26 8:56
 Home page displays more statistics
 
@@ -17,6 +20,7 @@ HOME STRETCH PLAN
 If we are "finished":
   - Add user data specific functionality such as favorite states (Dec. 1)
   - Add tables along with the scattergrams that display numerical data (Dec. 1)
+  - Add sliders that allow the users to move through time and view scattergram data through time (extra)
 
 josephY -- 2019-11-24 12:15
 New variable: State GDP from the BEAAPI. Weird x4 thing because there is an entry in the dataset for every quarter,
