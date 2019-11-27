@@ -200,9 +200,7 @@ def analysis():
         variables['y'] = depVars
 
         if request.args:
-
             params = [request.args.get('xVar'), request.args.get('yVar')]
-
         return render_template("analysis.html", username=session['username'], variables=variables)
 
     flash("Log in to use Atmo.")
