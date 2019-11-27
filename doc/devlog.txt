@@ -1,5 +1,15 @@
-aliceN -- 2019-11-16 9:24
-Updated design doc to reflect current file names and APIs in use. Made the slider functionality optional and edited the scattergrams to only take in two variables and have each point on the scattergram be specific to one state.
+aliceN -- 2019-11-27 9:25
+Updates to design doc:
+  - Removed "most recently viewed" functionality
+  - Updated component map to reflect currently used databases and APIs
+  - Added documentation for analysis.html
+  - Fixed documentation for base.html
+  - Changed name of database "users" to "loginfo"
+
+aliceN -- 2019-11-26 9:24
+Updated design doc to reflect current file names and APIs in use. Made the slider
+functionality optional and edited the scattergrams to only take in two variables and
+have each point on the scattergram be specific to one state.
 
 wangD -- 2019-11-26 8:56
 Home page displays more statistics
