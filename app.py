@@ -90,12 +90,12 @@ def register():
 def welcome():
     if "username" in session:
         r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key=07626e3b3578edd0e55ba15cb38770a85aedd31d")
-		data = [json.loads(r.read())[1][0]]
-		r = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
-		data.append(json.loads(r.read())[1][1])
-		r = urllib.request.urlopen("https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A")
-		data.append(json.loads(r.read())["series"][0]["data"][0][1])
-		return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], username=session['username'])
+        data = [json.loads(r.read())[1][0]]
+        r = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
+        data.append(json.loads(r.read())[1][1])
+        r = urllib.request.urlopen("https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A")
+        data.append(json.loads(r.read())["series"][0]["data"][0][1])
+        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], username=session['username'])
     else:
         return redirect("/login")
 
@@ -163,7 +163,7 @@ def lookup():
             # session['IncomeCache'] = data
             # caches data to the data/ directory
             # with open('./data/income.json', 'w') as outfile:
-            # 	json.dump(data, session['IncomeCache'], indent=4)
+            #     json.dump(data, session['IncomeCache'], indent=4)
             # print(data['results'][0]['name'])
             return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(int(request.args.get('state')))], co2=co2, username=session['username'], states=states, flag=f, selected=request.args.get('state'))
         return render_template("lookup.html", username=session['username'], states=states)
@@ -198,7 +198,13 @@ def analysis():
         depVars.append(co2['series'][0]['name'])
         variables['x'] = indVars
         variables['y'] = depVars
+
+        if request.args:
+
+            params = [request.args.get('xVar'), request.args.get('yVar')]
+
         return render_template("analysis.html", username=session['username'], variables=variables)
+
     flash("Log in to use Atmo.")
     return redirect("/login")
 

@@ -2,7 +2,7 @@
 {% block title %}Analysis{% endblock %}
 {% block header %}Analysis{% endblock %}
 {% block graph %}
-{% if graph %}
+{% if data %}
     <script>
         window.onload = function () {
 
@@ -59,7 +59,7 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-{% if graph %}
+{% if data %}
 <div class="container">
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -76,7 +76,7 @@
                 {% for  member in variables['x'] %}
                 <option value="{{member}}">{{member}}</option>
                 {% endfor %}
-            </select>    
+            </select>
         </div>
         <div class="form-group">
             <label for="yVar">
@@ -86,7 +86,7 @@
                 {% for  member in variables['y'] %}
                 <option value="{{member}}">{{member}}</option>
                 {% endfor %}
-            </select>    
+            </select>
         </div>
         <button class="btn btn-primary" type="submit">Get Stats</button>
     </form>
