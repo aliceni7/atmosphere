@@ -16,6 +16,9 @@ import random
 import csv
 import sqlite3
 import os
+from util import cache
+
+cache.cache()
 
 states = {}
 reader = csv.reader(open("./data/states.csv", "r"))
