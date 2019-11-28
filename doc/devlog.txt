@@ -1,3 +1,6 @@
+josephY -- 2019-11-28 18:40
+Began caching ALL data into a cache,json file located in atmosphere/data/JSON. From here, the handler will pass data into the template, and the template will render the graph with the correct data points.
+
 aliceN -- 2019-11-27 9:25
 Updates to design doc:
   - Removed "most recently viewed" functionality
