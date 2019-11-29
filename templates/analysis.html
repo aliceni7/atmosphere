@@ -10,45 +10,23 @@
                 animationEnabled: true,
                 zoomEnabled: true,
                 title: {
-                    text: "Blah"
+                    text: "{{ data['y']['description'] }} vs {{ data['x']['description'] }}"
                 },
                 axisX: {
-                    title: "Area (in sq. ft)",
-                    // minimum: 790,
-                    // maximum: 2260
+                    title: "{{ data['x']['description'] }} ({{ data['x']['units'] }})"
+                    //minimum: 790,
+                    //maximum: 2260
                 },
                 axisY: {
-                    title: "Price (in USD)",
-                    valueFormatString: "$#,##0k"
+                    title: "{{ data['y']['description'] }} ({{ data['y']['units'] }})"
                 },
                 data: [{
                     type: "scatter",
-                    toolTipContent: "{n}<br><b>Area: </b>{x} sq.ft<br/><b>Price: </b>${y}k",
+                    toolTipContent: "{state}<br><b>{{ data['x']['units'] }}: </b>{x}<br/><b>{{ data['y']['units'] }}: </b>{y}",
                     dataPoints: [
-                        { x: 800, y: 350, n: "Ireland" },
-                        { x: 900, y: 450, n: "Ireland" },
-                        { x: 850, y: 450, n: "Ireland" },
-                        { x: 1250, y: 700, n: "Ireland" },
-                        { x: 1100, y: 650, n: "Ireland" },
-                        { x: 1350, y: 850, n: "Ireland" },
-                        { x: 1200, y: 900, n: "Ireland" },
-                        { x: 1410, y: 1250, n: "Ireland" },
-                        { x: 1250, y: 1100, n: "Ireland" },
-                        { x: 1400, y: 1150, n: "Ireland" },
-                        { x: 1500, y: 1050, n: "Ireland" },
-                        { x: 1330, y: 1120, n: "Ireland" },
-                        { x: 1580, y: 1220, n: "Ireland" },
-                        { x: 1620, y: 1400, n: "Ireland" },
-                        { x: 1250, y: 1450, n: "Ireland" },
-                        { x: 1350, y: 1600, n: "Ireland" },
-                        { x: 1650, y: 1300, n: "Ireland" },
-                        { x: 1700, y: 1620, n: "Ireland" },
-                        { x: 1750, y: 1700, n: "Ireland" },
-                        { x: 1830, y: 1800, n: "Ireland" },
-                        { x: 1900, y: 2000, n: "Ireland" },
-                        { x: 2050, y: 2200, n: "Ireland" },
-                        { x: 2150, y: 1960, n: "Ireland" },
-                        { x: 2250, y: 1990, n: "Ireland" }
+			{% for member in data['x']['data'] %}
+                            { x: {{data['x']['data'][member]}}, y: {{ data['y']['data'][member] }}, state: "{{member}}" },
+                        {% endfor %}
                     ]
                 }]
             });
@@ -73,9 +51,8 @@
                 <h4>Select an Independant Variable:</h4>
             </label>
             <select class="form-control" name="xVar" id="xVar">
-                {% for  member in variables['x'] %}
-                <option value="{{member}}">{{member}}</option>
-                {% endfor %}
+              <option value="income">Per Capita Personal Income by State</option>
+	      <option value="gdp">Gross Domestic Product by State</option>
             </select>
         </div>
         <div class="form-group">
@@ -83,9 +60,7 @@
                 <h4>Select an Dependant Variable:</h4>
             </label>
             <select class="form-control" name="yVar" id="yVar">
-                {% for  member in variables['y'] %}
-                <option value="{{member}}">{{member}}</option>
-                {% endfor %}
+              <option value="co2">Total carbon dioxide emissions from all sectors, all fuels, by State</option>
             </select>
         </div>
         <button class="btn btn-primary" type="submit">Get Stats</button>

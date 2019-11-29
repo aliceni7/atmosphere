@@ -149,7 +149,7 @@ def lookup():
             gdp = json.loads(g.read())
 
             p = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-{}.A".format(
+                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-{}.A".format(
                     alpha)
             )
             co2 = json.loads(p.read())
@@ -177,35 +177,24 @@ def lookup():
 @app.route("/analysis")
 def analysis():
     if 'username' in session:
-        r = urllib.request.urlopen(
-            "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
-        )
-        income = json.loads(r.read())
-
-        g = urllib.request.urlopen(
-            "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
-        )
-        gdp = json.loads(g.read())
-
-        p = urllib.request.urlopen(
-            "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-US.A"
-        )
-        co2 = json.loads(p.read())
-
-        f = "http://flags.ox3.in/svg/us/US.svg"
-        variables = {}
-        indVars = []
-        indVars.append(income['BEAAPI']['Results']['Statistic'])
-        indVars.append(gdp['BEAAPI']['Results']['Statistic'])
-        depVars = []
-        depVars.append(co2['series'][0]['name'])
-        variables['x'] = indVars
-        variables['y'] = depVars
-
         if request.args:
             params = [request.args.get('xVar'), request.args.get('yVar')]
-        return render_template("analysis.html", username=session['username'], variables=variables)
-
+            with open("./data/JSON/cache.json", "r") as cachefile:
+                cache = json.load(cachefile)
+            data = {}
+            
+            data['x'] = cache[params[0]]
+            for member in data['x']['data']:
+                data['x']['data'][member] = str(data['x']['data'][member]).replace(',', '')
+                print("x = ", member)
+                                
+            data['y'] = cache[params[1]]
+            for member in data['y']['data']:
+                data['y']['data'][member] = str(data['y']['data'][member]).replace(',', '')
+                print("y = ", member)
+                
+            return render_template("analysis.html", username=session['username'], data=data)
+        return render_template("analysis.html", username=session['username'])
     flash("Log in to use Atmo.")
     return redirect("/login")
 
