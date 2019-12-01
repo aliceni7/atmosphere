@@ -18,21 +18,22 @@ import sqlite3
 import os
 from util import cache
 
-cache.cache()
+# cache.cache()
 
 states = {}
 reader = csv.reader(open("./data/states.csv", "r"))
-# for row in reader:
+for row in reader:
 #     print(row)
-#     states[row[0]] = row[1]
+    states[row[0]] = row[1]
 
 IDtoAlpha = {}
 reader = csv.reader(open("./data/id-to-alpha.csv", "r"))
-# for row in reader:
+for row in reader:
 #     print(row)
-#     IDtoAlpha[row[0]] = row[1]
+    IDtoAlpha[row[0]] = row[1]
 
 
+# cache.cache()
 app = Flask(__name__)  # create instance of class Flask
 app.secret_key = os.urandom(24)
 
@@ -199,4 +200,5 @@ def analysis():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run(host='0.0.0.0')
+    cache.cache()
+    app.run()

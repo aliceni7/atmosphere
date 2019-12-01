@@ -150,6 +150,6 @@ def cache():
     with open("./data/JSON/cache.json", 'w') as outfile:
         json.dump(toDump, outfile, indent=4)
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run()
+# if __name__ == "__main__":
+#     app.debug = True
+#     app.run()
