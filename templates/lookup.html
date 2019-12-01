@@ -46,6 +46,14 @@
             <!-- <h4>{{gdp['GeoName']}}: ${{gdp['DataValue']}}</h4> -->
             <hr>
         {% endif %}
+		{% if coal %}
+			{% if 'data' not in coal %}
+            <h5 class="card-title">Coal Consumption, electric power, 2017</h5>
+            <p class="card-text">{{coal['series'][0]['data'][0][1]}} short tons</p>
+            <!-- <h4>{{gdp['GeoName']}}: ${{gdp['DataValue']}}</h4> -->
+            <hr>
+			{% endif %}
+        {% endif %}
 
         {% if co2 %}
             <!-- <h4>Industrial carbon dioxide emissions, all fuels, in {{co2['series'][0]['data'][0][0]}}</h4> -->
