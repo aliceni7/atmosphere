@@ -24,9 +24,12 @@
                     type: "scatter",
                     toolTipContent: "{state}<br><b>{{ data['x']['units'] }}: </b>{x}<br/><b>{{ data['y']['units'] }}: </b>{y}",
                     dataPoints: [
-			{% for member in data['x']['data'] %}
+						{% for member in data['x']['data'] %}
+						{% if (data['x']['data'][member] == NULL) or (data['y']['data'][member] == NULL) %}
+						{% else %}
                             { x: {{data['x']['data'][member]}}, y: {{ data['y']['data'][member] }}, state: "{{member}}" },
-                        {% endfor %}
+						{% endif %}
+						{% endfor %}
                     ]
                 }]
             });
@@ -61,6 +64,7 @@
             </label>
             <select class="form-control" name="yVar" id="yVar">
               <option value="co2">Total carbon dioxide emissions from all sectors, all fuels, by State</option>
+			  <option value="coal">Total coal consumption for electric power, by state</option>
             </select>
         </div>
         <button class="btn btn-primary" type="submit">Get Stats</button>

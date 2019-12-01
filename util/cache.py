@@ -3,7 +3,6 @@ import json
 import urllib
 
 def cache():
-    print("Tommy")
 
     toDump = {}
     
@@ -19,6 +18,10 @@ def cache():
     co2Dump = {}
     co2Data = {}
 
+    # Gasoline data
+    coalDump = {}
+    coalData = {}
+    
     # -------------------- Income into toDump Dictoionary --------------------
     r = urllib.request.urlopen(
         "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
@@ -26,9 +29,13 @@ def cache():
     income = json.loads(r.read())
     incomeDump['description'] = income['BEAAPI']['Results']['Statistic']
     incomeDump['units'] = income['BEAAPI']['Results']['UnitOfMeasure']
+
+    print(" * Caching Income Data...")
+    
     for member in income['BEAAPI']['Results']['Data']:
         incomeData[ member['GeoName'].replace('*', '') ] = member['DataValue']
 
+    print(" * Done. \n ----------")
         # Deleting Regional Data Entries
     del incomeData['United States']
     del incomeData['New England']
@@ -50,9 +57,13 @@ def cache():
     gdp = json.loads(g.read())
     gdpDump['description'] = gdp['BEAAPI']['Results']['Statistic']
     gdpDump['units'] = gdp['BEAAPI']['Results']['UnitOfMeasure']
+
+    print(" * Caching GDP Data...")
+    
     for member in gdp['BEAAPI']['Results']['Data']:
         gdpData[ member['GeoName'].replace('*', '') ] = member['DataValue']
 
+    print(" * Done. \n ----------")
         # Deleting Regional Data Entries
     del gdpData['United States']
     del gdpData['New England']
@@ -81,9 +92,7 @@ def cache():
         for row in reader:
             alphaCodes[ row[0] ] = row[1]
         
-        print("##########")
-        print(alphaCodes)
-        print("##########")
+        print(" * Caching CO2 data...")
 
         for member in alphaCodes:
             c = urllib.request.urlopen(
@@ -91,10 +100,51 @@ def cache():
             )
             thisCo2 = json.loads(c.read())
             co2Data[thisCo2['series'][0]['name'][60:]] = thisCo2['series'][0]['data'][0][1]
+            
+        print(" * Done.\n ----------")
                          
     co2Dump['data'] = co2Data
     toDump['co2'] = co2Dump
         
+    # -------------------- Coal stats into toDump Dictoionary --------------------
+    k = urllib.request.urlopen(
+        "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=COAL.CONS_TOT.AL-98.A"
+    )
+    coal = json.loads(k.read())
+    coalDump['description'] = "Total coal consumption for electric power, by state"
+    coalDump['units'] = coal['series'][0]['units']
+    
+    with open("./data/id-to-alpha.csv", "r") as infile:
+        alphaCodes = {}
+        reader = csv.reader(infile)
+        for row in reader:
+            alphaCodes[ row[0] ] = row[1]
+        del alphaCodes['9']
+        del alphaCodes['12']
+        del alphaCodes['13']
+        del alphaCodes['40']                
+        del alphaCodes['46']
+        
+        print(" * Caching Coal Stats...")
+
+        for member in alphaCodes:
+            l = urllib.request.urlopen(
+                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=COAL.CONS_TOT.{}-98.A".format(alphaCodes[member])
+            )
+            thisCoal = json.loads(l.read())
+            # print(thisCoal['series'])
+            coalData[ thisCoal['series'][0]['name'][20:-34] ] = thisCoal['series'][0]['data'][0][1]
+
+        coalData['DC'] = 0
+        coalData['HI'] = 0
+        coalData['ID'] = 0
+        coalData['RI'] = 0
+        coalData['VT'] = 0  
+        print(" * Done.\n ----------")
+                         
+    coalDump['data'] = coalData
+    toDump['coal'] = coalDump
+
     f = "http://flags.ox3.in/svg/us/US.svg"
 
     with open("./data/JSON/cache.json", 'w') as outfile:

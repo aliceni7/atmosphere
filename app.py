@@ -22,17 +22,16 @@ cache.cache()
 
 states = {}
 reader = csv.reader(open("./data/states.csv", "r"))
-for row in reader:
-    print(row)
-    states[row[0]] = row[1]
+# for row in reader:
+#     print(row)
+#     states[row[0]] = row[1]
 
 IDtoAlpha = {}
 reader = csv.reader(open("./data/id-to-alpha.csv", "r"))
-for row in reader:
-    print(row)
-    IDtoAlpha[row[0]] = row[1]
+# for row in reader:
+#     print(row)
+#     IDtoAlpha[row[0]] = row[1]
 
-# print(m49)
 
 app = Flask(__name__)  # create instance of class Flask
 app.secret_key = os.urandom(24)
@@ -186,12 +185,10 @@ def analysis():
             data['x'] = cache[params[0]]
             for member in data['x']['data']:
                 data['x']['data'][member] = str(data['x']['data'][member]).replace(',', '')
-                print("x = ", member)
                                 
             data['y'] = cache[params[1]]
             for member in data['y']['data']:
                 data['y']['data'][member] = str(data['y']['data'][member]).replace(',', '')
-                print("y = ", member)
                 
             return render_template("analysis.html", username=session['username'], data=data)
         return render_template("analysis.html", username=session['username'])

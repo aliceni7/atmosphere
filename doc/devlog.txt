@@ -1,3 +1,6 @@
+josephY -- 201-12-01 15:10
+Added Coal usage variable, app now has two independant and two dependant variables.
+
 josephY -- 2019-11-29 01:30
 aNALYSIS bY iNDICATORS IS UP AND RUNNING. I am very tired, but I feel accomplished. As of right now, the
 analysis by indicators option only has three variables to choose from, but more can be put into place.
