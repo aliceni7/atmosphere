@@ -111,7 +111,7 @@ def auth():
     print(pair)
     if len(pair) == 0:
         flash("Username not found")
-        return "username not found"
+        return redirect("/login")
     if pair[0][0] == request.args["username"]:
         if pair[0][1] == request.args["password"]:
             session["username"] = request.args["username"]
@@ -199,4 +199,4 @@ def analysis():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')

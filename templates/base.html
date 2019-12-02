@@ -11,18 +11,18 @@
 </head>
 <body>
     <nav style="position: sticky; top: 0; z-index:1;">
-        <nav class="container-fluid py-3" style="background: #d6e0e4;">
+        <nav class="container-fluid py-3" style="background: #212222;">
             <div class="row align-items-center justify-content-around">
-                <a class="h3" style="text-decoration: none; color: black;" href="/">Team Atmosphere<a>
+                <a class="h3" style="text-decoration: none; color: white;" href="/">Team Atmosphere<a>
                 {% if 'username' not in session %}
-                <a class="" style="justify-self:center;" class="" href="/login"> <button style="justify-self: center;"class="col btn btn-primary">Login</button> </a>
-                <a class="" style="justify-self:center;" class="" href="/register"> <button style="justify-self: center;"class="col btn btn-primary">Register</button> </a>
+                <a class="" style="justify-self:center;" class="" href="/login"> <button style="justify-self: center;"class="col btn btn-outline-light">Login</button> </a>
+                <a class="" style="justify-self:center;" class="" href="/register"> <button style="justify-self: center;"class="col btn btn-outline-light">Register</button> </a>
                 {% endif %}
-                <a class="" style="justify-self:center;" class="" href="/lookup"> <button style="justify-self: center;"class="col btn btn-primary">Stats by State</button> </a>
-                <a class="" style="justify-self:center;" class="" href="/analysis"> <button style="justify-self: center;"class="col btn btn-primary">Analysis by Indicators</button> </a>
+                <a class="" style="justify-self:center;" class="" href="/lookup"> <button style="justify-self: center;"class="col btn btn-outline-light">Stats by State</button> </a>
+                <a class="" style="justify-self:center;" class="" href="/analysis"> <button style="justify-self: center;"class="col btn btn-outline-light">Analysis by Indicators</button> </a>
 
                 {% if 'username' in session %}
-                <a class="" style="justify-self:center;" class="" href="/welcome"> <button style="justify-self: center;"class="col btn btn-primary">Dashboard</button> </a>
+                <a class="" style="justify-self:center;" class="" href="/welcome"> <button style="justify-self: center;"class="col btn btn-outline-light">Dashboard</button> </a>
                 <a class="" style="justify-self:center;" class="" href="/logout"> <button style="justify-self: center;"class="col btn btn-danger">Logout</button> </a>
                 {% endif %}
             </div>
