@@ -27,6 +27,6 @@ The APIs:
 1. Clone and cd into the repo
 2. Set up a virtual environment using `python3 -m venv .`
 3. Install the necessary packages using `pip3 install -r requirements.txt`
-4. Visit API documentation pages, procure API keys ( Bureau of Economic Analysis API, Environmental Information Administration API, and Census Bureau API ), and paste them into the correct files in the "keys" directory. Provided are development keys, please do not use these.
+4. Visit API documentation pages, procure API keys ( Bureau for Economic Analysis API, Energy Information Administration API, and Census Bureau API ), and paste them into the correct files in the "keys" directory. Provided are development keys, please do not use these.
 5. Run app.py
 6. Explore the ATMO
