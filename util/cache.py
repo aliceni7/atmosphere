@@ -4,6 +4,28 @@ import urllib
 
 def cache():
 
+    BEA_KEY = ""
+    with open('./keys/BEA_KEY.txt', 'r') as file:
+        BEA_KEY = file.read().replace('\n', '')
+
+    EIA_KEY = ""
+    with open('./keys/EIA_KEY.txt', 'r') as file:
+        EIA_KEY = file.read().replace('\n', '')
+
+    CENSUS_KEY = ""
+    with open('./keys/CENSUS_KEY.txt', 'r') as file:
+        CENSUS_KEY = file.read().replace('\n', '')
+
+    if BEA_KEY == "":
+        print("!!! Please enter a valid BEA key into BEA_KEY.txt !!!")
+        exit()
+    if EIA_KEY == "":
+        print("!!! Please enter a valid EIA key into EIA_KEY.txt !!!")
+        exit()
+    if CENSUS_KEY == "":
+        print("!!! Please enter a valid Census key into CENSUS_KEY.txt !!!")
+        exit()
+
     toDump = {}
     
     # Income Dicts
@@ -24,7 +46,7 @@ def cache():
     
     # -------------------- Income into toDump Dictoionary --------------------
     r = urllib.request.urlopen(
-        "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
+        "https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON".format(BEA_KEY)  # Some API link goes here
     )
     income = json.loads(r.read())
     incomeDump['description'] = income['BEAAPI']['Results']['Statistic']
@@ -52,7 +74,7 @@ def cache():
 
     # -------------------- GDP into toDump Dictoionary --------------------
     g = urllib.request.urlopen(
-        "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
+        "https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON".format(BEA_KEY)  # Some API link goes here
     )
     gdp = json.loads(g.read())
     gdpDump['description'] = gdp['BEAAPI']['Results']['Statistic']
@@ -80,7 +102,7 @@ def cache():
 
     # -------------------- CO2 into toDump Dictoionary --------------------
     p = urllib.request.urlopen(
-        "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-US.A"
+        "https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-TT-TO-US.A".format(EIA_KEY)
     )
     co2 = json.loads(p.read())
     co2Dump['description'] = co2['series'][0]['name'][:58]
@@ -96,7 +118,7 @@ def cache():
 
         for member in alphaCodes:
             c = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-{}.A".format(alphaCodes[member])
+                "https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-TT-TO-{}.A".format(EIA_KEY, alphaCodes[member])
             )
             thisCo2 = json.loads(c.read())
             co2Data[thisCo2['series'][0]['name'][60:]] = thisCo2['series'][0]['data'][0][1]
@@ -108,7 +130,7 @@ def cache():
         
     # -------------------- Coal stats into toDump Dictoionary --------------------
     k = urllib.request.urlopen(
-        "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=COAL.CONS_TOT.AL-98.A"
+        "https://api.eia.gov/series/?api_key={}&series_id=COAL.CONS_TOT.AL-98.A".format(EIA_KEY)
     )
     coal = json.loads(k.read())
     coalDump['description'] = "Total coal consumption for electric power, by state"
@@ -129,7 +151,7 @@ def cache():
 
         for member in alphaCodes:
             l = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=COAL.CONS_TOT.{}-98.A".format(alphaCodes[member])
+                "https://api.eia.gov/series/?api_key={}&series_id=COAL.CONS_TOT.{}-98.A".format(EIA_KEY, alphaCodes[member])
             )
             thisCoal = json.loads(l.read())
             # print(thisCoal['series'])

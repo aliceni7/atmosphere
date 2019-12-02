@@ -32,6 +32,28 @@ for row in reader:
 #     print(row)
     IDtoAlpha[row[0]] = row[1]
 
+BEA_KEY = ""
+with open('./keys/BEA_KEY.txt', 'r') as file:
+    BEA_KEY = file.read().replace('\n', '')
+
+EIA_KEY = ""
+with open('./keys/EIA_KEY.txt', 'r') as file:
+    EIA_KEY = file.read().replace('\n', '')
+
+CENSUS_KEY = ""
+with open('./keys/CENSUS_KEY.txt', 'r') as file:
+    CENSUS_KEY = file.read().replace('\n', '')
+
+if BEA_KEY == "":
+    print("!!! Please enter a valid BEA key into BEA_KEY.txt !!!")
+    exit()
+if EIA_KEY == "":
+    print("!!! Please enter a valid EIA key into EIA_KEY.txt !!!")
+    exit()
+if CENSUS_KEY == "":
+    print("!!! Please enter a valid Census key into CENSUS_KEY.txt !!!")
+    exit()
+    
 
 # cache.cache()
 app = Flask(__name__)  # create instance of class Flask
@@ -92,11 +114,11 @@ def register():
 @app.route("/welcome")
 def welcome():
     if "username" in session:
-        r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key=07626e3b3578edd0e55ba15cb38770a85aedd31d")
+        r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key={}".format(CENSUS_KEY))
         data = [json.loads(r.read())[1][0]]
         r = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
         data.append(json.loads(r.read())[1][1])
-        r = urllib.request.urlopen("https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-IC-TO-US.A")
+        r = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-IC-TO-US.A".format(EIA_KEY))
         data.append(json.loads(r.read())["series"][0]["data"][0][1])
         return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], username=session['username'])
     else:
@@ -139,22 +161,22 @@ def lookup():
             alpha = IDtoAlpha[request.args.get('state')]
             print("##########\n{}".format(alpha))
             r = urllib.request.urlopen(
-                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON"  # Some API link goes here
+                "https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON".format(BEA_KEY)  # Some API link goes here
             )
             income = json.loads(r.read())
 
             g = urllib.request.urlopen(
-                "https://apps.bea.gov/api/data/?&UserID=1B07B684-579E-4E91-8517-DA093A82DA43&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON"  # Some API link goes here
+                "https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON".format(BEA_KEY)  # Some API link goes here
             )
             gdp = json.loads(g.read())
 
             p = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=EMISS.CO2-TOTV-TT-TO-{}.A".format(alpha)
+                "https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-TT-TO-{}.A".format(EIA_KEY, alpha)
             )
             co2 = json.loads(p.read())
 
             c = urllib.request.urlopen(
-                "https://api.eia.gov/series/?api_key=a646920f26214e3dbdad25a3908f9c5f&series_id=COAL.CONS_TOT.{}-98.A".format(alpha)
+                "https://api.eia.gov/series/?api_key={}&series_id=COAL.CONS_TOT.{}-98.A".format(EIA_KEY, alpha)
             )
 
             coal = json.loads(c.read())

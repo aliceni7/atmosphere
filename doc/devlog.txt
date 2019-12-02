@@ -1,4 +1,7 @@
-josephY -- 201-12-01 15:10
+josephY -- 2019-12-02 04:30
+User must now provide keys in seperate files in the keys directory.
+
+josephY -- 2019-12-01 15:10
 Added Coal usage variable, app now has two independant and two dependant variables.
 
 josephY -- 2019-11-29 01:30
