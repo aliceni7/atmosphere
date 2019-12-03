@@ -42,6 +42,33 @@
 {% block content %}
 {% if data %}
 <div class="container">
+
+  <form action="/analysis" class="my-4">
+    <div class="form-group">
+      <label for="xVar">
+        <h4>Select an Independant Variable:</h4>
+      </label>
+      <select class="form-control" name="xVar" id="xVar">
+        <option value="income">Per Capita Personal Income by State</option>
+	<option value="gdp">Gross Domestic Product by State</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="yVar">
+        <h4>Select an Dependant Variable:</h4>
+      </label>
+      <select class="form-control" name="yVar" id="yVar">
+        <option value="co2">Total carbon dioxide emissions from all sectors, all fuels, by State</option>
+	<option value="coal">Total coal consumption for electric power, by state</option>
+      </select>
+    </div>
+    <br>
+    <button class="btn btn-dark" type="submit">Get Stats</button>
+  </form>
+</div>
+<br><br><br>
+
+<div class="container">
   <div id="chartContainer" style="height: 370px; width: 100%;"></div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
@@ -70,32 +97,6 @@
   </table>
 </div>
 {% endif %}
-<br><br><br>
-<div class="container">
-
-  <form action="/analysis" class="my-4">
-    <div class="form-group">
-      <label for="xVar">
-        <h4>Select an Independant Variable:</h4>
-      </label>
-      <select class="form-control" name="xVar" id="xVar">
-        <option value="income">Per Capita Personal Income by State</option>
-	<option value="gdp">Gross Domestic Product by State</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="yVar">
-        <h4>Select an Dependant Variable:</h4>
-      </label>
-      <select class="form-control" name="yVar" id="yVar">
-        <option value="co2">Total carbon dioxide emissions from all sectors, all fuels, by State</option>
-	<option value="coal">Total coal consumption for electric power, by state</option>
-      </select>
-    </div>
-    <br>
-    <button class="btn btn-dark" type="submit">Get Stats</button>
-  </form>
-</div>
 <br><br><br>
 
 {% endblock %}
