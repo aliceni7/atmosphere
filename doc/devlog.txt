@@ -1,8 +1,11 @@
+aliceN -- 2019-12-02 21:33
+Added table that compares analysis by indicators. Replaced the lorem text in the welcome page with instructions on how to run ATMO.
+
 josephY -- 2019-12-02 04:30
 User must now provide keys in seperate files in the keys directory.
 
 josephY -- 2019-12-01 15:10
-Added Coal usage variable, app now has two independant and two dependant variables.
+Added Coal usage variable, app now has two independent and two dependent variables.
 
 josephY -- 2019-11-29 01:30
 aNALYSIS bY iNDICATORS IS UP AND RUNNING. I am very tired, but I feel accomplished. As of right now, the
