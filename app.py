@@ -57,7 +57,7 @@ if CENSUS_KEY == "":
 
 # cache.cache()
 app = Flask(__name__)  # create instance of class Flask
-app.secret_key = os.urandom(24)
+app.secret_key = "dfsgdfg"
 
 
 def runsqlcommand(command):
@@ -159,10 +159,21 @@ def logout():
     return redirect("/login")
 
 
+@app.route("/favadder")
+def favadder():
+    print(session)
+    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';"
+    return "reeeeee"
+
+
+
 @app.route("/lookup")
 def lookup():
     if 'username' in session:
         if request.args:
+            if request.args["submit"] == "favorite":
+                session["state"] = request.args["state"]
+                return redirect("/favadder")
             print("\n{}".format(request.args.get('state')))
             alpha = IDtoAlpha[request.args.get('state')]
             print("##########\n{}".format(alpha))
