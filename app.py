@@ -53,7 +53,7 @@ if EIA_KEY == "":
 if CENSUS_KEY == "":
     print("!!! Please enter a valid Census key into CENSUS_KEY.txt !!!")
     exit()
-    
+
 
 # cache.cache()
 app = Flask(__name__)  # create instance of class Flask
@@ -114,13 +114,19 @@ def register():
 @app.route("/welcome")
 def welcome():
     if "username" in session:
-        r = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key={}".format(CENSUS_KEY))
-        data = [json.loads(r.read())[1][0]]
-        r = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
-        data.append(json.loads(r.read())[1][1])
-        r = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-IC-TO-US.A".format(EIA_KEY))
-        data.append(json.loads(r.read())["series"][0]["data"][0][1])
-        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], username=session['username'])
+        pop = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key={}".format(CENSUS_KEY))
+        data = [json.loads(pop.read())[1][0]]
+        pov = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
+        data.append(json.loads(pov.read())[1][1])
+        co2 = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-IC-TO-US.A".format(EIA_KEY))
+        data.append(json.loads(co2.read())["series"][0]["data"][0][1])
+        coal = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=COAL.CONS_TOT.US-98.A".format(EIA_KEY))
+        data.append(json.loads(coal.read())["series"][0]["data"][0][1])
+        pci = urllib.request.urlopen("https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAINC1&GeoFIPS=STATE&LineCode=3&Year=2017&ResultFormat=JSON".format(BEA_KEY))
+        data.append(json.loads(pci.read())["BEAAPI"]["Results"]["Data"][0]["DataValue"])
+        gdp = urllib.request.urlopn("https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON".format(BEA_KEY))
+        data.append(json.loads(pci.read())["BEAAPI"]["Results"]["Data"][0]["DataValue"])
+        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], coal = data[3], pci = data[4], username=session['username'])
     else:
         return redirect("/login")
 
@@ -157,7 +163,6 @@ def logout():
 def lookup():
     if 'username' in session:
         if request.args:
-            print(request.args)
             print("\n{}".format(request.args.get('state')))
             alpha = IDtoAlpha[request.args.get('state')]
             print("##########\n{}".format(alpha))
@@ -181,9 +186,9 @@ def lookup():
             )
 
             coal = json.loads(c.read())
-            
+
             f = "http://flags.ox3.in/svg/us/{}.svg".format(alpha.lower())
-            
+
             print(f)
             # print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
             # print("This should be state ID: {}".format(request.args.get('state')))
@@ -210,15 +215,15 @@ def analysis():
             with open("./data/JSON/cache.json", "r") as cachefile:
                 cache = json.load(cachefile)
             data = {}
-            
+
             data['x'] = cache[params[0]]
             for member in data['x']['data']:
                 data['x']['data'][member] = str(data['x']['data'][member]).replace(',', '')
-                                
+
             data['y'] = cache[params[1]]
             for member in data['y']['data']:
                 data['y']['data'][member] = str(data['y']['data'][member]).replace(',', '')
-                
+
             return render_template("analysis.html", username=session['username'], data=data)
         return render_template("analysis.html", username=session['username'])
     flash("Log in to use Atmo.")
