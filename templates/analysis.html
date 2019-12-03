@@ -40,7 +40,7 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-{% if data %}
+
 <div class="container">
 
   <form action="/analysis" class="my-4">
@@ -67,7 +67,7 @@
   </form>
 </div>
 <br><br><br>
-
+{% if data %}
 <div class="container">
   <div id="chartContainer" style="height: 370px; width: 100%;"></div>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
