@@ -157,6 +157,7 @@ def logout():
 def lookup():
     if 'username' in session:
         if request.args:
+            print(request.args)
             print("\n{}".format(request.args.get('state')))
             alpha = IDtoAlpha[request.args.get('state')]
             print("##########\n{}".format(alpha))
