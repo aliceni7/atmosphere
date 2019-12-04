@@ -126,7 +126,8 @@ def welcome():
         data.append(json.loads(pci.read())["BEAAPI"]["Results"]["Data"][0]["DataValue"])
         gdp = urllib.request.urlopen("https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON".format(BEA_KEY))
         data.append(json.loads(gdp.read())["BEAAPI"]["Results"]["Data"][0]["DataValue"])
-        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], coal = data[3], pci = data[4], username=session['username'])
+        pic = "http://flags.ox3.in/svg/us.svg"
+        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], coal = data[3], pci = data[4], gdp = data[5], flag = pic, username=session['username'])
     else:
         return redirect("/login")
 

@@ -1,3 +1,9 @@
+wangD -- 2019-12-03 23:01
+Formatted dashboard, added flag to US statistics page.
+
+wangD -- 2019-12-03 9:24
+Finished statistics for United States.
+
 aliceN -- 2019-12-02 21:33
 Added table that compares analysis by indicators. Replaced the lorem text in the welcome page with instructions on how to run ATMO.
 
@@ -12,9 +18,11 @@ aNALYSIS bY iNDICATORS IS UP AND RUNNING. I am very tired, but I feel accomplish
 analysis by indicators option only has three variables to choose from, but more can be put into place.
 All data is cached in a .json file called cache, and the cache is updated every time the server is started.
 
-
 josephY -- 2019-11-28 18:40
 Began caching ALL data into a cache,json file located in atmosphere/data/JSON. From here, the handler will pass data into the template, and the template will render the graph with the correct data points.
+
+wangD -- 2019-11-27 9:26
+Finished Census Bureau and EIA cards.
 
 aliceN -- 2019-11-27 9:25
 Updates to design doc:
