@@ -163,11 +163,17 @@ def logout():
 @app.route("/favadder")
 def favadder():
     print(session)
-    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';".format(session["user"])
+    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
     d = runsqlcommand(command)
-    print(d)
-    print(type(d))
-    return "reeeeee"
+    if len(d) == 0:
+        command = "CREATE TABLE {} (TEXT favstate);".format(session["username"])
+        runsqlcommand(command)
+    command = "INSERT INTO {username} VALUES('{state}')".format(username=session["username"], state=IDtoAlpha[session["state"]])
+    print(command)
+    runsqlcommand(command)
+    toflash = "{} added to favorites".format(IDtoAlpha[session["state"]])
+    flash(toflash)
+    return redirect("/lookup")
 
 
 
