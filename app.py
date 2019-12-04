@@ -54,7 +54,6 @@ if CENSUS_KEY == "":
     print("!!! Please enter a valid Census key into CENSUS_KEY.txt !!!")
     exit()
 
-
 # cache.cache()
 app = Flask(__name__)  # create instance of class Flask
 app.secret_key = "dfsgdfg"
@@ -69,6 +68,7 @@ def runsqlcommand(command):
         return c.fetchall()
     db.commit()  # save changes
     db.close()  # close database
+
 
 
 @app.route("/")  # assign following fxn to run when root route requested
@@ -145,6 +145,7 @@ def auth():
         if pair[0][1] == request.args["password"]:
             session["username"] = request.args["username"]
             flash("Successfully logged in as: {}".format(session['username']))
+            print("HERE")
             return redirect("/welcome")
         flash("Wrong password")
         return redirect("/login")
@@ -162,7 +163,10 @@ def logout():
 @app.route("/favadder")
 def favadder():
     print(session)
-    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';"
+    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';".format(session["user"])
+    d = runsqlcommand(command)
+    print(d)
+    print(type(d))
     return "reeeeee"
 
 
