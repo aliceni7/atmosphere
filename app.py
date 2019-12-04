@@ -1,7 +1,7 @@
 # Joseph Yusufov, Mudadour Rahman, Alice Ni, David Wang
 # SoftDev1 pd2
 # Atmosphere
-# 2019-11-xx
+# 2019-12-04
 
 from flask import Flask, render_template, request, session
 from flask import render_template
@@ -117,6 +117,7 @@ def register():
 
 @app.route("/welcome")
 def welcome():
+    """ Retrieves and prints data about the United States """
     if "username" in session:
         pop = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key={}".format(CENSUS_KEY))
         data = [json.loads(pop.read())[1][0]]
@@ -138,6 +139,7 @@ def welcome():
 
 @app.route("/auth")
 def auth():
+    """ Checks for user in the database and in session """
     command = "SELECT * FROM loginfo WHERE username LIKE '{}'".format(
         request.args["username"])
     pair = runsqlcommand(command)
@@ -167,6 +169,7 @@ def logout():
 
 @app.route("/favadder")
 def favadder():
+    """ Mechanism for the user to add to their favorite states list """
     print(session)
     command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
     d = runsqlcommand(command)
@@ -192,6 +195,7 @@ def favadder():
 
 @app.route("/lookup")
 def lookup():
+    """ Form that allows users to choose specific states and view the data """
     if 'username' in session:
         if request.args:
             if request.args["submit"] == "favorite":
@@ -234,17 +238,6 @@ def lookup():
                 favorites = d
                 print("FAVORITE STATES: {}".format(favorites))
 
-            # print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
-            # print("This should be state ID: {}".format(request.args.get('state')))
-            # for member in data:
-            # print(member + "\n")
-            # CACHING MUST BE DONE WITH Flask-Caching
-
-            # session['IncomeCache'] = data
-            # caches data to the data/ directory
-            # with open('./data/income.json', 'w') as outfile:
-            #     json.dump(data, session['IncomeCache'], indent=4)
-            # print(data['results'][0]['name'])
             return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(int(request.args.get('state')))], co2=co2, coal=coal, username=session['username'], states=states, flag=f, selected=request.args.get('state'), favorites=favorites, AlphaToID=AlphaToID)
 
         command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
@@ -264,6 +257,7 @@ def lookup():
 
 @app.route("/analysis")
 def analysis():
+    """ Choosing an independent and dependent variable for comparison """
     if 'username' in session:
         if request.args:
             params = [request.args.get('xVar'), request.args.get('yVar')]
