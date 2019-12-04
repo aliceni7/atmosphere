@@ -32,6 +32,10 @@ for row in reader:
 #     print(row)
     IDtoAlpha[row[0]] = row[1]
 
+AlphaToID = {}
+for k, v in IDtoAlpha.items():
+    AlphaToID[v] = k
+
 BEA_KEY = ""
 with open('./keys/BEA_KEY.txt', 'r') as file:
     BEA_KEY = file.read().replace('\n', '')
@@ -56,7 +60,7 @@ if CENSUS_KEY == "":
 
 # cache.cache()
 app = Flask(__name__)  # create instance of class Flask
-app.secret_key = "dfsgdfg"
+app.secret_key = os.urandom(24)
 
 
 def runsqlcommand(command):
@@ -164,11 +168,25 @@ def logout():
 @app.route("/favadder")
 def favadder():
     print(session)
-    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';".format(session["user"])
+    command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
     d = runsqlcommand(command)
-    print(d)
-    print(type(d))
-    return "reeeeee"
+    if len(d) == 0:
+        command = "CREATE TABLE {} (TEXT favstate);".format(session["username"])
+        runsqlcommand(command)
+
+    command = "SELECT * FROM {};".format(session['username'])
+    d = runsqlcommand(command)
+    for member in d:
+        if IDtoAlpha[ session['state'] ] in member:
+            flash("State is already a favorite")
+            return redirect("/lookup")
+    command = "INSERT INTO {username} VALUES('{state}')".format(username=session["username"], state=IDtoAlpha[session["state"]])
+    print(command)
+    runsqlcommand(command)
+    toflash = "{} added to favorites".format(IDtoAlpha[session["state"]])
+    
+    flash(toflash)
+    return redirect("/lookup")
 
 
 
@@ -206,6 +224,16 @@ def lookup():
             f = "http://flags.ox3.in/svg/us/{}.svg".format(alpha.lower())
 
             print(f)
+            command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
+            d = runsqlcommand(command)
+            if len(d) == 0:
+                favorites = []
+            else:
+                command = "SELECT * FROM {};".format(session['username'])
+                d = runsqlcommand(command)
+                favorites = d
+                print("FAVORITE STATES: {}".format(favorites))
+
             # print(data['BEAAPI']['Results']['Data'][1]['DataValue'])
             # print("This should be state ID: {}".format(request.args.get('state')))
             # for member in data:
@@ -217,8 +245,19 @@ def lookup():
             # with open('./data/income.json', 'w') as outfile:
             #     json.dump(data, session['IncomeCache'], indent=4)
             # print(data['results'][0]['name'])
-            return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(int(request.args.get('state')))], co2=co2, coal=coal, username=session['username'], states=states, flag=f, selected=request.args.get('state'))
-        return render_template("lookup.html", username=session['username'], states=states)
+            return render_template("lookup.html", income=income['BEAAPI']['Results']['Data'][int(request.args.get('state'))], gdp=gdp['BEAAPI']['Results']['Data'][(int(request.args.get('state')))], co2=co2, coal=coal, username=session['username'], states=states, flag=f, selected=request.args.get('state'), favorites=favorites, AlphaToID=AlphaToID)
+
+        command = "SELECT name FROM sqlite_master WHERE type='table' AND name='{}';".format(session["username"])
+        d = runsqlcommand(command)
+        if len(d) == 0:
+            favorites = []
+        else:
+            command = "SELECT * FROM {};".format(session['username'])
+            d = runsqlcommand(command)
+            favorites = d
+            print("FAVORITE STATES: {}".format(favorites))
+
+        return render_template("lookup.html", username=session['username'], states=states, favorites = favorites, AlphaToID=AlphaToID)
     flash("Log in to use Atmo.")
     return redirect("/login")
 

@@ -11,6 +11,15 @@
     {% block header %}Stats By State{% endblock %}
     {% block content %}
     <div class="container">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
 
         <form action="/lookup" class="my-4">
             <div class="form-group">
@@ -28,6 +37,27 @@
             <button class="btn btn-dark" type="submit" value="submit" name="submit">Get Stats</button>
             <button class="btn btn-dark" type="submit" value="favorite" name="submit">Add as Favorite</button>
         </form>
+
+	{% if favorites|length == 0 %}
+	{% else %}
+	<div>
+	  <h4>Favorites:</h4>
+	  <div class="row d-flex justify-content-around">
+	    {% for member in favorites %}
+	    <div class="col-3">
+	      <a href="/lookup?state={{ AlphaToID[member[0]] }}&submit=submit">
+	      <div class="card">
+		<img alt="" class="card-img-top" src="{{ "http://flags.ox3.in/svg/us/{}.svg".format(member[0].lower()) }}"/>
+		<div class="card-body">
+		  <h5 class="card-title">{{member[0]}}</h5>
+		</div>
+	      </div>
+	      </a>	      
+	    </div>
+	    {% endfor %}
+	  </div>
+	</div>
+	{% endif %}
         {% if income %}
             <div class="card text-center my-3">
                 <div class="card-header">
