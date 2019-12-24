@@ -87,7 +87,7 @@ def cache():
 
     print(" * Done. \n ----------")
         # Deleting Regional Data Entries
-    del gdpData['United States']
+    del gdpData['United States ']
     del gdpData['New England']
     del gdpData['Mideast']
     del gdpData['Great Lakes']

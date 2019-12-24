@@ -121,8 +121,8 @@ def welcome():
     if "username" in session:
         pop = urllib.request.urlopen("https://api.census.gov/data/2018/pep/population?get=POP&for=us:*&key={}".format(CENSUS_KEY))
         data = [json.loads(pop.read())[1][0]]
-        pov = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
-        data.append(json.loads(pov.read())[1][1])
+        # pov = urllib.request.urlopen("https://api.census.gov/data/timeseries/poverty/saipe?get=NAME,SAEPOVALL_PT&for=us:*&time=2016")
+        # data.append(json.loads(pov.read())[1][1])
         co2 = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=EMISS.CO2-TOTV-IC-TO-US.A".format(EIA_KEY))
         data.append(json.loads(co2.read())["series"][0]["data"][0][1])
         coal = urllib.request.urlopen("https://api.eia.gov/series/?api_key={}&series_id=COAL.CONS_TOT.US-98.A".format(EIA_KEY))
@@ -132,7 +132,7 @@ def welcome():
         gdp = urllib.request.urlopen("https://apps.bea.gov/api/data/?&UserID={}&method=GetData&datasetname=Regional&TableName=SAGDP2N&GeoFIPS=STATE&LineCode=3&Year=2017&Frequency=A&ResultFormat=JSON".format(BEA_KEY))
         data.append(json.loads(gdp.read())["BEAAPI"]["Results"]["Data"][0]["DataValue"])
         pic = "http://flags.ox3.in/svg/us.svg"
-        return render_template("welcome.html", population = data[0], poverty = data[1], emissions = data[2], coal = data[3], pci = data[4], gdp = data[5], flag = pic, username=session['username'])
+        return render_template("welcome.html", population = data[0], emissions = data[1], coal = data[2], pci = data[3], gdp = data[4], flag = pic, username=session['username'])
     else:
         return redirect("/login")
 

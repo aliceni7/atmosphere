@@ -4,7 +4,7 @@
         "units": "Dollars",
         "data": {
             "Alabama": "40,467",
-            "Alaska": "56,794",
+            "Alaska ": "56,794",
             "Arizona": "42,505",
             "Arkansas": "41,520",
             "California": "60,156",
@@ -14,7 +14,7 @@
             "District of Columbia": "78,969",
             "Florida": "47,869",
             "Georgia": "44,536",
-            "Hawaii": "53,145",
+            "Hawaii ": "53,145",
             "Idaho": "42,094",
             "Illinois": "53,943",
             "Indiana": "45,225",
