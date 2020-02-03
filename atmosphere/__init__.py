@@ -17,17 +17,18 @@ import csv
 import sqlite3
 import os
 from util import cache
-
+DIR = os.path.dirname(__file__) or '.'
+DIR += '/'
 # cache.cache()
 
 states = {}
-reader = csv.reader(open("./data/states.csv", "r"))
+reader = csv.reader(open(DIR + "data/states.csv", "r"))
 for row in reader:
 #     print(row)
     states[row[0]] = row[1]
 
 IDtoAlpha = {}
-reader = csv.reader(open("./data/id-to-alpha.csv", "r"))
+reader = csv.reader(open(DIR + "data/id-to-alpha.csv", "r"))
 for row in reader:
 #     print(row)
     IDtoAlpha[row[0]] = row[1]
@@ -37,15 +38,15 @@ for k, v in IDtoAlpha.items():
     AlphaToID[v] = k
 
 BEA_KEY = ""
-with open('./keys/BEA_KEY.txt', 'r') as file:
+with open(DIR + 'keys/BEA_KEY.txt', 'r') as file:
     BEA_KEY = file.read().replace('\n', '')
 
 EIA_KEY = ""
-with open('./keys/EIA_KEY.txt', 'r') as file:
+with open(DIR + 'keys/EIA_KEY.txt', 'r') as file:
     EIA_KEY = file.read().replace('\n', '')
 
 CENSUS_KEY = ""
-with open('./keys/CENSUS_KEY.txt', 'r') as file:
+with open(DIR + 'keys/CENSUS_KEY.txt', 'r') as file:
     CENSUS_KEY = file.read().replace('\n', '')
 
 if BEA_KEY == "":
@@ -64,7 +65,7 @@ app.secret_key = os.urandom(24)
 
 
 def runsqlcommand(command):
-    DB_FILE = "data.db"
+    DB_FILE = DIR + "data.db"
     db = sqlite3.connect(DB_FILE)  # open if file exists, otherwise create
     c = db.cursor()  # facilitate db ops
     c.execute(command)
@@ -261,7 +262,7 @@ def analysis():
     if 'username' in session:
         if request.args:
             params = [request.args.get('xVar'), request.args.get('yVar')]
-            with open("./data/JSON/cache.json", "r") as cachefile:
+            with open(DIR + "data/JSON/cache.json", "r") as cachefile:
                 cache = json.load(cachefile)
             data = {}
 
