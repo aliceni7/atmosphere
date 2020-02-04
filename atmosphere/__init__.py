@@ -282,6 +282,6 @@ def analysis():
 
 
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
     cache.cache()
     app.run(host='0.0.0.0')
